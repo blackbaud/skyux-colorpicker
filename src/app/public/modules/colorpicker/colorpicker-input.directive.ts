@@ -144,7 +144,7 @@ export class SkyColorpickerInputDirective
       this.renderer.setElementAttribute(
         this.elementRef.nativeElement,
         'aria-label',
-        this.getString('sky_colorpicker_input_default_label'));
+        this.getString('skyux_colorpicker_input_default_label'));
     }
 
     const typeAttr = element.getAttribute('type');

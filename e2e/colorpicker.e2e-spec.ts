@@ -23,3 +23,19 @@ describe('Colorpicker', () => {
     expect('#screenshot-colorpicker2').toMatchBaselineScreenshot(done);
   });
 });
+
+describe('Colorpicker (small screens)', () => {
+  beforeEach(() => {
+    SkyHostBrowser.get('visual/colorpicker');
+    SkyHostBrowser.setWindowBreakpoint('xs');
+  });
+
+  it('should match previous colorpicker screenshot', (done) => {
+    expect('#screenshot-colorpicker').toMatchBaselineScreenshot(done);
+  });
+
+  it('should match previous opened screenshot', (done) => {
+    element(by.css('sky-dropdown button')).click();
+    expect('#screenshot-colorpicker2').toMatchBaselineScreenshot(done);
+  });
+});
