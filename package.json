@@ -1,6 +1,6 @@
 {
   "name": "@skyux/colorpicker",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-rc.0",
   "description": "SKY UX Colorpicker",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
@@ -31,9 +31,8 @@
     "@angular/forms": "^4.3.6",
     "@skyux/core": "^3.1.0",
     "@skyux/i18n": "^3.0.1",
-    "@skyux/popovers": ">=3.0.0-rc.0",
-    "@skyux/theme": "^3.1.0",
-    "rxjs": "^5.4.3"
+    "@skyux/popovers": "^3.0.0-rc.0",
+    "@skyux/theme": "^3.1.0"
   },
   "dependencies": {},
   "devDependencies": {
