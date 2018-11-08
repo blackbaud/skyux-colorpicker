@@ -8,14 +8,17 @@ import {
   OnDestroy,
   OnInit,
   Renderer,
-  SimpleChanges
+  SimpleChanges,
+  Injector
 } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  Validator
+  Validator,
+  NgControl,
+  FormControl
 } from '@angular/forms';
 
 import {
@@ -95,7 +98,8 @@ export class SkyColorpickerInputDirective
     private elementRef: ElementRef,
     private renderer: Renderer,
     private service: SkyColorpickerService,
-    private resourcesService: SkyLibResourcesService
+    private resourcesService: SkyLibResourcesService,
+    private inj: Injector
   ) { }
 
   @HostListener('input', ['$event'])
@@ -125,7 +129,6 @@ export class SkyColorpickerInputDirective
 
     this.renderer.setElementClass(element, 'sky-form-control', true);
     this.skyColorpickerInput.initialColor = this.initialColor;
-    this.skyColorpickerInput.lastAppliedColor = this.initialColor;
     this.skyColorpickerInput.returnFormat = this.returnFormat;
 
     this.pickerChangedSubscription =
@@ -183,7 +186,7 @@ export class SkyColorpickerInputDirective
   public registerOnValidatorChange(fn: () => void): void { this._validatorChange = fn; }
 
   public writeValue(value: any) {
-    if (value) {
+    if (value && value !== this.skyColorpickerInput.lastAppliedColor) {
       this.modelValue = this.formatter(value);
       this.writeModelValue(this.modelValue);
 
@@ -192,6 +195,10 @@ export class SkyColorpickerInputDirective
         this.skyColorpickerInput.initialColor = value;
       }
       this.skyColorpickerInput.lastAppliedColor = value;
+      let control: FormControl = (<NgControl>this.inj.get(NgControl)).control as FormControl;
+      if (control) {
+        control.setValue(this.modelValue, { emitEvent: false });
+      }
     }
   }
 
@@ -261,4 +268,5 @@ export class SkyColorpickerInputDirective
   /*istanbul ignore next */
   private _onTouched = () => { };
   private _validatorChange = () => { };
+
 }
