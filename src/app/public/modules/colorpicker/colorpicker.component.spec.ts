@@ -13,8 +13,10 @@ import {
 import {
   By
 } from '@angular/platform-browser';
+
 import {
-  FormsModule, ReactiveFormsModule
+  FormsModule,
+  ReactiveFormsModule
 } from '@angular/forms';
 
 import {
@@ -28,19 +30,26 @@ import {
 import {
   SkyColorpickerModule
 } from './colorpicker.module';
+
 import {
   ColorpickerTestComponent
 } from './fixtures/colorpicker-component.fixture';
+
 import {
   SkyColorpickerComponent
 } from './colorpicker.component';
+
 import {
   SkyColorpickerMessageType
 } from './types';
+
 import {
   SkyColorpickerInputDirective
 } from './colorpicker-input.directive';
-import { ColorpickerReactiveTestComponent } from './fixtures/colorpicker-reactive-component.fixture';
+
+import {
+  ColorpickerReactiveTestComponent
+} from './fixtures/colorpicker-reactive-component.fixture';
 
 describe('Colorpicker Component', () => {
   let fixture: ComponentFixture<any>;

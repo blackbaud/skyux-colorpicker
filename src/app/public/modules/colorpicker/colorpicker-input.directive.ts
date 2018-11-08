@@ -11,6 +11,7 @@ import {
   SimpleChanges,
   Injector
 } from '@angular/core';
+
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -32,9 +33,11 @@ import {
 import {
   SkyColorpickerService
 } from './colorpicker.service';
+
 import {
   SkyColorpickerComponent
 } from './colorpicker.component';
+
 import {
   SkyColorpickerHsva,
   SkyColorpickerOutput
