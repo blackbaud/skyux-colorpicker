@@ -1,75 +1,21 @@
-<h3>Text Group</h3>
-
-<form [formGroup]="textGroup">
-  <input type="text" formControlName="text1">
-  <br>
-  <input type="text" formControlName="text2">
-  <br>
-  <input type="text" formControlName="text3">
-  <br>
-  <input type="text" formControlName="text4">
-  <br>
-  <input type="text" formControlName="text5">
-  <br>
-</form>
-<br>
-<button type="button" (click)="textGroupUpdate()">Update Text Group</button>
-
-<br>
-Text group value changes fired {{ textGroupUpdateCount }} time(s)
-
-<h3>Color Group</h3>
-
-<form [formGroup]="colorGroup">
-
-<sky-colorpicker
-  #colorEl1
->
+<div id="screenshot-colorpicker">
+  <sky-colorpicker #colorPickerExample1>
   <input
-    formControlName="color1"
-    outputFormat="hex"
-    [skyColorpickerInput]="colorEl1"
-  >
+      [skyColorpickerInput]="colorPickerExample1"
+      [(ngModel)]="color1"
+      [presetColors]="presetColors1"
+      [initialColor]="selectedColor1"
+      [outputFormat]="selectedOutputFormat1">
 </sky-colorpicker>
-<sky-colorpicker
-  #colorEl2
->
-  <input
-    formControlName="color2"
-    outputFormat="hex"
-    [skyColorpickerInput]="colorEl2"
-  >
-</sky-colorpicker>
-<sky-colorpicker
-  #colorEl3
->
-  <input
-    formControlName="color3"
-    outputFormat="hex"
-    [skyColorpickerInput]="colorEl3"
-  >
-</sky-colorpicker>
-<sky-colorpicker
-  #colorEl4
->
-  <input
-    formControlName="color4"
-    outputFormat="hex"
-    [skyColorpickerInput]="colorEl4"
-  >
-</sky-colorpicker>
-<sky-colorpicker
-  #colorEl5
->
-  <input
-    formControlName="color5"
-    outputFormat="hex"
-    [skyColorpickerInput]="colorEl5"
-  >
-</sky-colorpicker>
-</form>
-<br>
-<button type="button" (click)="colorGroupUpdate()">Update Color Group</button>
+</div>
 
-<br>
-Color group value changes fired {{ colorGroupUpdateCount }} time(s)
+<div id="screenshot-colorpicker2" style="height:520px;padding:10px;">
+  <sky-colorpicker #colorPickerExample2>
+  <input
+      [skyColorpickerInput]="colorPickerExample2"
+      [(ngModel)]="color2"
+      [presetColors]="presetColors2"
+      [initialColor]="selectedColor2"
+      [outputFormat]="selectedOutputFormat2">
+</sky-colorpicker>
+</div>
