@@ -710,7 +710,7 @@ describe('Colorpicker Component', () => {
 
   });
 
-  fdescribe('reactive configuration', () => {
+  describe('reactive configuration', () => {
 
     let component: ColorpickerReactiveTestComponent;
 
@@ -833,17 +833,19 @@ describe('Colorpicker Component', () => {
       expect(nativeElement.querySelectorAll('.sky-colorpicker-reset-button').length).toEqual(1);
     }));
 
-    it('should only emit the form control valueChanged event once per change', async(() => {
+    it('should only emit the form control valueChanged event once per change', (done) => {
       fixture.detectChanges();
-      let count = 0;
-      component.colorForm.valueChanges.subscribe(() => {
-        count++;
-        if (count > 1) {
-          fail('the valueChanges event fired more than once');
-        }
+      let callback = function() {};
+      let callbackSpy = jasmine.createSpy('callback', callback);
+      component.colorForm.valueChanges.subscribe(() => { callbackSpy(); });
+      // This will give us 10 milliseconds pause before emitting the final valueChanges event that
+      // was fired. Testing was done to ensure this was enough time to catch any bad behavior
+      component.colorForm.valueChanges.sampleTime(10).subscribe(() => {
+        expect(callbackSpy).toHaveBeenCalledTimes(1);
+        done();
       });
       component.colorForm.setValue(component.newValues);
-    }));
+    });
 
   });
 

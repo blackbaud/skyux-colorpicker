@@ -102,7 +102,7 @@ export class SkyColorpickerInputDirective
     private renderer: Renderer,
     private service: SkyColorpickerService,
     private resourcesService: SkyLibResourcesService,
-    private inj: Injector
+    private injector: Injector
   ) { }
 
   @HostListener('input', ['$event'])
@@ -198,7 +198,7 @@ export class SkyColorpickerInputDirective
         this.skyColorpickerInput.initialColor = value;
       }
       this.skyColorpickerInput.lastAppliedColor = value;
-      let control: FormControl = (<NgControl>this.inj.get(NgControl)).control as FormControl;
+      let control: FormControl = (<NgControl>this.injector.get(NgControl)).control as FormControl;
       if (control) {
         control.setValue(this.modelValue, { emitEvent: false });
       }
