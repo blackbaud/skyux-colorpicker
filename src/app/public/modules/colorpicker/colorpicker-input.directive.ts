@@ -75,6 +75,9 @@ export class SkyColorpickerInputDirective
 
   @Input()
   public set initialColor(value: string) {
+    if (!this._initialColor && !this.modelValue) {
+      this.writeValue(value);
+    }
     this._initialColor = value;
   }
 
