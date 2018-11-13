@@ -739,8 +739,8 @@ describe('Colorpicker Component', () => {
 
     it('should allow user to click cancel the color change.', fakeAsync(() => {
       component.selectedOutputFormat = 'hex';
-      component.colorControl.setValue('#2889e5');
       fixture.detectChanges();
+      component.colorControl.setValue('#2889e5');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
       closeColorpicker(nativeElement, fixture);
@@ -749,9 +749,9 @@ describe('Colorpicker Component', () => {
 
     it('should use the last applied color to revert to on cancel', fakeAsync(() => {
       component.selectedOutputFormat = 'hex';
-      component.colorControl.setValue('#2889e5');
       fixture.detectChanges();
       tick();
+      component.colorControl.setValue('#2889e5');
       fixture.detectChanges();
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       openColorpicker(nativeElement, fixture);
@@ -766,6 +766,7 @@ describe('Colorpicker Component', () => {
 
     it('should allow user to click apply the color change.', fakeAsync(() => {
       component.selectedOutputFormat = 'hex';
+      fixture.detectChanges();
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#2B7230');
       applyColorpicker(nativeElement, fixture);

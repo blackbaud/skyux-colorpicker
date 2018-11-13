@@ -73,6 +73,9 @@ export class SkyColorpickerInputDirective
   @Input()
   public skyColorpickerInput: SkyColorpickerComponent;
 
+  /**
+   * @deprecated Use either a reactive or template driven form to set this value
+   */
   @Input()
   public set initialColor(value: string) {
     if (!this._initialColor && !this.modelValue) {
@@ -164,6 +167,7 @@ export class SkyColorpickerInputDirective
     }
 
     element.setAttribute('readonly', 'true');
+    this.renderer.setElementClass(element, 'sky-colorpicker-input', true);
   }
 
   public ngOnDestroy() {
@@ -245,7 +249,6 @@ export class SkyColorpickerInputDirective
     this.renderer.setElementStyle(element, 'background-color', setElementValue);
     this.renderer.setElementStyle(element, 'color', setElementValue);
     this.renderer.setElementProperty(element, 'value', output);
-    this.renderer.setElementClass(element, 'sky-colorpicker-input', true);
   }
 
   private formatter(color: any) {
