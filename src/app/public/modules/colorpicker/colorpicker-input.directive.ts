@@ -247,7 +247,7 @@ export class SkyColorpickerInputDirective
     this.skyColorpickerInput.setColorFromString(output);
 
     this.renderer.setElementStyle(element, 'background-color', setElementValue);
-    this.renderer.setElementStyle(element, 'color', setElementValue);
+    this.renderer.setElementStyle(element, 'color', 'transparent');
     this.renderer.setElementProperty(element, 'value', output);
   }
 
