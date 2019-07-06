@@ -41,6 +41,7 @@
                 [xAxis]="1"
                 (newColorContrast)="hue=$event"
                 class="hue"
+                [ngClass]="{'upper-slider': this.alphaChannel==='hex8'}"
                 #hueSlider>
                 <div
                   [style.left.px]="slider.hue"
@@ -48,6 +49,7 @@
                 </div>
               </div>
               <div
+                *ngIf="this.alphaChannel==='hex8'"
                 [skyColorpickerSlider]
                 [style.background-color]="alphaSliderColor"
                 [xAxis]="1"
@@ -84,6 +86,7 @@
                 {{ 'skyux_colorpicker_blue' | skyLibResources }}
               </label>
               <label
+                *ngIf="this.alphaChannel==='hex8'"
                 [for]="skyColorpickerAlphaId"
                 [attr.aria-label]="'skyux_colorpicker_aria_alpha' | skyLibResources">
                 {{ 'skyux_colorpicker_alpha' | skyLibResources }}
@@ -127,6 +130,7 @@
                 (newColorContrast)="blue=$event"
                 [value]="rgbaText?.blue">
               <input
+                *ngIf="this.alphaChannel==='hex8'"
                 [id]="skyColorpickerAlphaId"
                 [skyColorpickerText]
                 type="number"
