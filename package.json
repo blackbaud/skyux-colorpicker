@@ -1,6 +1,6 @@
 {
   "name": "@skyux/colorpicker",
-  "version": "3.1.0",
+  "version": "3.0.1",
   "description": "SKY UX Colorpicker",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
@@ -9,7 +9,7 @@
     "skyux": "skyux",
     "start": "skyux serve --hmr",
     "test": "skyux test --coverage library --logFormat none",
-    "watch": "skyux watch",
+    "watch": "skyux watch --coverage library",
     "test:visual": "skyux e2e --logFormat none"
   },
   "keywords": [],
@@ -36,7 +36,6 @@
   "devDependencies": {
     "@blackbaud/skyux": "2.38.0",
     "@blackbaud/skyux-builder": "1.30.0",
-    "@blackbaud/skyux-cli": "^1.6.2",
     "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.5"
   }
 }
