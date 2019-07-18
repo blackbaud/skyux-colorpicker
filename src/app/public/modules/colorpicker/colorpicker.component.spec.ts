@@ -697,9 +697,7 @@ describe('Colorpicker Component', () => {
       expect(nativeElement.querySelectorAll('.sky-colorpicker-reset-button').length).toEqual(1);
     }));
 
-    it('should display alpha related elements when specified', fakeAsync(() => {
-      component.selectedOutputFormat = 'rgba';
-      component.selectedHexType = 'hex8';
+    it('should display alpha related elements by default', fakeAsync(() => {
       fixture.detectChanges();
       tick();
 
@@ -713,8 +711,8 @@ describe('Colorpicker Component', () => {
       expect(alphaInput).toBeTruthy();
     }));
 
-    it('should not display alpha related elements for alphaChannel hex6', fakeAsync(() => {
-      component.selectedHexType = 'hex6';
+    it('should not display alpha related elements when allowTransparency is specified', fakeAsync(() => {
+      component.selectedTransparency = false;
       fixture.detectChanges();
 
       openColorpicker(nativeElement, fixture);
