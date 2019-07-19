@@ -334,7 +334,6 @@ describe('Colorpicker Component', () => {
 
     it('should accept a new RGBA color.', fakeAsync(() => {
       component.selectedOutputFormat = 'hex';
-      component.selectedHexType = 'hex8';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'red', '163');
       setInputElementValue(nativeElement, 'green', '19');
@@ -434,7 +433,6 @@ describe('Colorpicker Component', () => {
 
     it('should accept mouse down events on alpha bar.', fakeAsync(() => {
       component.selectedOutputFormat = 'rgba';
-      component.selectedHexType = 'hex8';
       openColorpicker(nativeElement, fixture);
 
       const alphaBar = fixture.debugElement.query(By.css('.alpha'));
@@ -551,7 +549,6 @@ describe('Colorpicker Component', () => {
 
     it('should accept transparency', fakeAsync(() => {
       component.selectedOutputFormat = 'hsla';
-      component.selectedHexType = 'hex8';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'red', '0');
       setInputElementValue(nativeElement, 'green', '0');
@@ -704,10 +701,12 @@ describe('Colorpicker Component', () => {
       openColorpicker(nativeElement, fixture);
 
       const alphaBar = fixture.debugElement.query(By.css('.alpha'));
+
       expect(alphaBar).toBeTruthy();
-      const alphaInput = fixture.debugElement.query(By.css(
-        `#${component.colorpickerComponent.skyColorpickerAlphaId}`
-      ));
+
+      const selector = `#${component.colorpickerComponent.skyColorpickerAlphaId}`;
+      const alphaInput = fixture.debugElement.query(By.css(selector));
+
       expect(alphaInput).toBeTruthy();
     }));
 
@@ -718,10 +717,12 @@ describe('Colorpicker Component', () => {
       openColorpicker(nativeElement, fixture);
 
       const alphaBar = fixture.debugElement.query(By.css('.alpha'));
+
       expect(alphaBar).toBeFalsy();
-      const alphaInput = fixture.debugElement.query(By.css(
-        `#${component.colorpickerComponent.skyColorpickerAlphaId}`
-      ));
+
+      const selector = `#${component.colorpickerComponent.skyColorpickerAlphaId}`;
+      const alphaInput = fixture.debugElement.query(By.css(selector));
+
       expect(alphaInput).toBeFalsy();
     }));
 
