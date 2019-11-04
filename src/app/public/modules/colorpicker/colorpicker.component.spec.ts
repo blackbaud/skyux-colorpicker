@@ -666,10 +666,10 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       tick();
       component.sendMessage(SkyColorpickerMessageType.Open);
-      verifyMenuVisibility(true);
       tick();
       fixture.detectChanges();
       tick();
+      verifyMenuVisibility(true);
       component.sendMessage(SkyColorpickerMessageType.Close);
       tick();
       fixture.detectChanges();
