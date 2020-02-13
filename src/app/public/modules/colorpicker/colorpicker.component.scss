@@ -34,6 +34,14 @@
   color: transparent;
 }
 
+::ng-deep {
+  // Overwrite popover's scrollbar and max-height behavior.
+  .sky-popover {
+    overflow: visible !important;
+    max-height: 100% !important;
+  }
+}
+
 .sky-colorpicker-reset-button::before {
   content: '\f00d';
   font-family: FontAwesome;
