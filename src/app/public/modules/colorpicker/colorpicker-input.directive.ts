@@ -226,7 +226,6 @@ export class SkyColorpickerInputDirective
   }
 
   private writeModelValue(model: SkyColorpickerOutput) {
-    const setElementValue = model.rgbaText;
     const element = this.elementRef.nativeElement;
 
     let output: string;
@@ -250,8 +249,6 @@ export class SkyColorpickerInputDirective
     }
 
     this.skyColorpickerInput.setColorFromString(output);
-
-    this.renderer.setStyle(element, 'background-color', setElementValue);
     this.renderer.setProperty(element, 'value', output);
   }
 

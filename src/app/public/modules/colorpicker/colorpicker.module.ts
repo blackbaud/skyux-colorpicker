@@ -1,50 +1,57 @@
-// spell-checker:ignore Colorpicker, Dropdown
-import {
-  NgModule
-} from '@angular/core';
 import {
   CommonModule
 } from '@angular/common';
 
 import {
-  SkyDropdownModule
-} from '@skyux/popovers';
+  NgModule
+} from '@angular/core';
+
+import {
+  SkyAffixModule,
+  SkyOverlayModule
+} from '@skyux/core';
+
 import {
   SkyI18nModule
 } from '@skyux/i18n';
 
 import {
   SkyColorpickerResourcesModule
-} from '../shared';
+} from '../shared/colorpicker-resources.module';
+
+import {
+  SkyColorpickerInputDirective
+} from './colorpicker-input.directive';
+
+import {
+  SkyColorpickerSliderDirective
+} from './colorpicker-slider.directive';
+
+import {
+  SkyColorpickerTextDirective
+} from './colorpicker-text.directive';
 
 import {
   SkyColorpickerComponent
 } from './colorpicker.component';
-import {
-  SkyColorpickerInputDirective
-} from './colorpicker-input.directive';
+
 import {
   SkyColorpickerService
 } from './colorpicker.service';
-import {
-  SkyColorpickerTextDirective
-} from './colorpicker-text.directive';
-import {
-  SkyColorpickerSliderDirective
-} from './colorpicker-slider.directive';
 
 @NgModule({
   declarations: [
     SkyColorpickerComponent,
     SkyColorpickerInputDirective,
-    SkyColorpickerTextDirective,
-    SkyColorpickerSliderDirective
+    SkyColorpickerSliderDirective,
+    SkyColorpickerTextDirective
   ],
   imports: [
     CommonModule,
+    SkyAffixModule,
     SkyColorpickerResourcesModule,
     SkyI18nModule,
-    SkyDropdownModule
+    SkyOverlayModule
   ],
   exports: [
     SkyColorpickerComponent,
@@ -52,9 +59,6 @@ import {
   ],
   providers: [
     SkyColorpickerService
-  ],
-  entryComponents: [
-    SkyColorpickerComponent
   ]
 })
 export class SkyColorpickerModule { }
