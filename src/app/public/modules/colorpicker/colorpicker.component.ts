@@ -88,7 +88,16 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   public initialColor: string;
   public lastAppliedColor: string;
   public isVisible: boolean;
+
   public backgroundColorForDisplay: string = '#fff';
+
+  public enablePicker: boolean = true;
+
+  public colorpickerId: string;
+
+  public isOpen: boolean = false;
+
+  public triggerButtonId: string;
 
   @ViewChild('closeColorPicker')
   private closeColorPicker: ElementRef;
@@ -145,6 +154,8 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     this.skyColorpickerGreenId = 'sky-colorpicker-green-' + this.idIndex;
     this.skyColorpickerBlueId = 'sky-colorpicker-blue-' + this.idIndex;
     this.skyColorpickerAlphaId = 'sky-colorpicker-alpha-' + this.idIndex;
+    this.colorpickerId = `sky-colorpicker-${this.idIndex}`;
+    this.triggerButtonId = `sky-colorpicker-button-${this.idIndex}`;
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -209,17 +220,21 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   }
 
   public openPicker(): void {
+    if (!this.enablePicker) {
+      return;
+    }
+
     this.isVisible = false;
-
     this.destroyOverlay();
-
     this.createOverlay();
+    this.isOpen = true;
   }
 
   public closePicker(): void {
     this.setColorFromString(this.lastAppliedColor);
     this.destroyAffixer();
     this.destroyOverlay();
+    this.isOpen = false;
   }
 
   public resetPickerColor() {
@@ -402,7 +417,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   private createOverlay(): void {
     const overlay = this.overlayService.create({
       enableScroll: true,
-      enablePointerEvents: true
+      enablePointerEvents: false
     });
 
     overlay.attachTemplate(this.colorpickerTemplateRef);

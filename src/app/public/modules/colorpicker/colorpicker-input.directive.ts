@@ -165,9 +165,9 @@ export class SkyColorpickerInputDirective
 
     const typeAttr = element.getAttribute('type');
     if (typeAttr && typeAttr === 'hidden') {
-      this.skyColorpickerInput.isVisible = false;
+      this.skyColorpickerInput.enablePicker = false;
     } else {
-      this.skyColorpickerInput.isVisible = true;
+      this.skyColorpickerInput.enablePicker = true;
     }
 
     element.setAttribute('readonly', 'true');
@@ -226,6 +226,7 @@ export class SkyColorpickerInputDirective
   }
 
   private writeModelValue(model: SkyColorpickerOutput) {
+    const setElementValue = model.rgbaText;
     const element = this.elementRef.nativeElement;
 
     let output: string;
@@ -249,6 +250,8 @@ export class SkyColorpickerInputDirective
     }
 
     this.skyColorpickerInput.setColorFromString(output);
+
+    this.renderer.setStyle(element, 'background-color', setElementValue);
     this.renderer.setProperty(element, 'value', output);
   }
 

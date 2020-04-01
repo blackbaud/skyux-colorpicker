@@ -7,7 +7,8 @@ import {
 } from '@angular/core/testing';
 
 import {
-  expect
+  expect,
+  SkyAppTestUtility
 } from '@skyux-sdk/testing';
 
 import {
@@ -50,12 +51,16 @@ describe('Colorpicker Component', () => {
   let nativeElement: HTMLElement;
   let colorpickerComponent: SkyColorpickerComponent;
 
+  function getColorpickerContainer(): HTMLElement {
+    return document.querySelector('.sky-colorpicker-container');
+  }
+
   function openColorpicker(element: HTMLElement, compFixture: ComponentFixture<any>) {
     tick();
     fixture.detectChanges();
     verifyMenuVisibility(false);
 
-    const buttonElem = element.querySelector('.sky-dropdown-button') as HTMLElement;
+    const buttonElem = element.querySelector('.sky-colorpicker-button') as HTMLElement;
     buttonElem.click();
     tick();
     fixture.detectChanges();
@@ -63,28 +68,35 @@ describe('Colorpicker Component', () => {
     verifyMenuVisibility();
   }
 
-  function applyColorpicker(element: HTMLElement, compFixture: ComponentFixture<ColorpickerTestComponent>) {
-    const buttonElem = element.querySelector('.sky-btn-colorpicker-apply') as HTMLElement;
+  function applyColorpicker(): void {
+    const buttonElem = getColorpickerContainer().querySelector('.sky-btn-colorpicker-apply') as HTMLElement;
     buttonElem.click();
     tick();
     fixture.detectChanges();
   }
 
-  function closeColorpicker(element: HTMLElement, compFixture: ComponentFixture<ColorpickerTestComponent>) {
-    const buttonElem = element.querySelector('.sky-btn-colorpicker-close') as HTMLElement;
+  function closeColorpicker(): void {
+    const buttonElem = getColorpickerContainer().querySelector('.sky-btn-colorpicker-close') as HTMLElement;
     buttonElem.click();
     tick();
     fixture.detectChanges();
   }
 
   function verifyMenuVisibility(isVisible = true) {
-    const popoverElem = fixture.nativeElement.querySelector('.sky-popover-container');
+    const popoverElem = getColorpickerContainer();
+
+    if (!isVisible) {
+      expect(popoverElem).toBeNull();
+      return;
+    }
+
     expect(getComputedStyle(popoverElem).visibility !== 'hidden').toEqual(isVisible);
   }
 
   function setPresetColor(element: HTMLElement, compFixture: ComponentFixture<any>, key: number) {
-    let presetColors = element.querySelectorAll('.sky-preset-color') as NodeListOf<HTMLElement>;
-    let applyColor = element.querySelector('.sky-btn-colorpicker-apply') as HTMLButtonElement;
+    const container = getColorpickerContainer();
+    const presetColors = container.querySelectorAll('.sky-preset-color') as NodeListOf<HTMLElement>;
+    const applyColor = container.querySelector('.sky-btn-colorpicker-apply') as HTMLButtonElement;
     presetColors[key].click();
     applyColor.click();
     applyColor.click();
@@ -147,8 +159,8 @@ describe('Colorpicker Component', () => {
     expect(outcome.toString()).toContain(test.replace(/[\s]/g, '').split(',').toString());
   }
 
-  function getElementCords(elementRef: any) {
-    const rect = (elementRef.nativeElement as HTMLElement).getBoundingClientRect();
+  function getElementCoords(element: Element): { x: number, y: number} {
+    const rect = element.getBoundingClientRect();
     const coords = {
       x: Math.round(rect.left + (rect.width / 2)),
       y: Math.round(rect.top + (rect.height / 2))
@@ -160,8 +172,8 @@ describe('Colorpicker Component', () => {
   function setInputElementValue(element: HTMLElement, name: string, value: string) {
     fixture.detectChanges();
     fixture.whenStable();
-    let inputElement: NodeListOf<Element> =
-      element.querySelectorAll('.rgba-text > div:last-child > input');
+    let inputElement: NodeListOf<Element> = getColorpickerContainer()
+      .querySelectorAll('.rgba-text > div:last-child > input');
     let input: any = {
       'hex': inputElement[0],
       'red': inputElement[1],
@@ -281,7 +293,7 @@ describe('Colorpicker Component', () => {
       tick();
 
       openColorpicker(nativeElement, fixture);
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#fff', '255, 255, 255');
     }));
 
@@ -297,7 +309,7 @@ describe('Colorpicker Component', () => {
       component.selectedColor = 'rgb(0,0,255)';
 
       openColorpicker(nativeElement, fixture);
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'rgba(0,0,255,1)', '0, 0, 255');
     }));
 
@@ -312,7 +324,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'rgba';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BC4');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'rgba(187,204,68,1)', '187, 204, 68');
     }));
 
@@ -320,7 +332,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#bff666', '191, 246, 102');
     }));
 
@@ -330,7 +342,7 @@ describe('Colorpicker Component', () => {
       setInputElementValue(nativeElement, 'red', '77');
       setInputElementValue(nativeElement, 'green', '58');
       setInputElementValue(nativeElement, 'blue', '183');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#4d3ab7', '77, 58, 183');
     }));
 
@@ -341,7 +353,7 @@ describe('Colorpicker Component', () => {
       setInputElementValue(nativeElement, 'green', '19');
       setInputElementValue(nativeElement, 'blue', '84');
       setInputElementValue(nativeElement, 'alpha', '0.3');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#a31354', '163, 19, 84, 0.3');
     }));
 
@@ -349,7 +361,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', 'hsl(113,78%,41%)');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#2aba17', '42, 186, 23');
     }));
 
@@ -357,7 +369,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', 'hsla(231,66%,41%,0.62)');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#2438ae', '36, 56, 174');
     }));
 
@@ -367,7 +379,7 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
-      closeColorpicker(nativeElement, fixture);
+      closeColorpicker();
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
     }));
 
@@ -380,11 +392,11 @@ describe('Colorpicker Component', () => {
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#2B7230');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
-      closeColorpicker(nativeElement, fixture);
+      closeColorpicker();
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
     }));
 
@@ -392,7 +404,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#2B7230');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
     }));
 
@@ -402,7 +414,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#2B7230');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
       expect(component.colorpickerComponent.selectedColorChanged.emit).toHaveBeenCalled();
       expect(component.colorpickerComponent.selectedColorApplied.emit).toHaveBeenCalled();
@@ -412,24 +424,37 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
 
-      const hueBar = fixture.debugElement.query(By.css('.hue'));
-      const axis = getElementCords(hueBar);
+      let hueBar = getColorpickerContainer().querySelector('.hue');
+      let axis = getElementCoords(hueBar);
 
-      hueBar.triggerEventHandler('mousedown', { 'pageX': axis.x, 'pageY': axis.y });
+      SkyAppTestUtility.fireDomEvent(hueBar, 'mousedown', {
+        customEventInit: { pageX: axis.x, pageY: axis.y }
+      });
+
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#28e5e5', '40, 229, 229');
 
       openColorpicker(nativeElement, fixture);
-      hueBar.triggerEventHandler('mousedown', { 'pageX': axis.x - 50, 'pageY': axis.y });
+      hueBar = getColorpickerContainer().querySelector('.hue');
+      axis = getElementCoords(hueBar);
+      SkyAppTestUtility.fireDomEvent(hueBar, 'mousedown', {
+        customEventInit: { pageX: axis.x - 50, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      tick();
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#a3e528', '163, 229, 40');
 
       openColorpicker(nativeElement, fixture);
-      hueBar.triggerEventHandler('mousedown', { 'pageX': axis.x + 50, 'pageY': axis.y });
+      hueBar = getColorpickerContainer().querySelector('.hue');
+      axis = getElementCoords(hueBar);
+      SkyAppTestUtility.fireDomEvent(hueBar, 'mousedown', {
+        customEventInit: { pageX: axis.x + 50, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      tick();
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#a328e5', '163, 40, 229');
     }));
 
@@ -437,24 +462,34 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'rgba';
       openColorpicker(nativeElement, fixture);
 
-      const alphaBar = fixture.debugElement.query(By.css('.alpha'));
-      const axis = getElementCords(alphaBar);
+      let alphaBar = getColorpickerContainer().querySelector('.alpha');
+      let axis = getElementCoords(alphaBar);
 
-      alphaBar.triggerEventHandler('mousedown', { 'pageX': axis.x, 'pageY': axis.y });
+      SkyAppTestUtility.fireDomEvent(alphaBar, 'mousedown', {
+        customEventInit: { pageX: axis.x, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'rgba(40,137,229,0.5)', '40, 137, 229, 0.5');
 
       openColorpicker(nativeElement, fixture);
-      alphaBar.triggerEventHandler('mousedown', { 'pageX': axis.x - 50, 'pageY': axis.y });
+      alphaBar = getColorpickerContainer().querySelector('.alpha');
+      axis = getElementCoords(alphaBar);
+      SkyAppTestUtility.fireDomEvent(alphaBar, 'mousedown', {
+        customEventInit: { pageX: axis.x - 50, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'rgba(40,137,229,0.23)', '40, 137, 229, 0.23');
 
       openColorpicker(nativeElement, fixture);
-      alphaBar.triggerEventHandler('mousedown', { 'pageX': axis.x + 50, 'pageY': axis.y });
+      alphaBar = getColorpickerContainer().querySelector('.alpha');
+      axis = getElementCoords(alphaBar);
+      SkyAppTestUtility.fireDomEvent(alphaBar, 'mousedown', {
+        customEventInit: { pageX: axis.x + 50, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'rgba(40,137,229,0.77)', '40, 137, 229, 0.77');
     }));
 
@@ -462,65 +497,108 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
 
-      const slBar = fixture.debugElement.query(By.css('.saturation-lightness'));
-      const axis = getElementCords(slBar);
+      let slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      let axis = getElementCoords(slBar);
 
-      slBar.triggerEventHandler('mousedown', { 'pageX': axis.x, 'pageY': axis.y });
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: { pageX: axis.x, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#406080', '64, 96, 128');
 
       openColorpicker(nativeElement, fixture);
-      slBar.triggerEventHandler('mousedown', { 'pageX': axis.x - 50, 'pageY': axis.y });
+      slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: { pageX: axis.x - 50, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#576b80', '87, 107, 128');
 
       openColorpicker(nativeElement, fixture);
-      slBar.triggerEventHandler('mousedown', { 'pageX': axis.x - 50, 'pageY': axis.y / 2 });
+      slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: { pageX: axis.x - 50, pageY: axis.y / 2 }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#92b3d6', '146, 179, 214');
 
       openColorpicker(nativeElement, fixture);
-      slBar.triggerEventHandler('mousedown', { 'pageX': axis.x, 'pageY': axis.y / 2 });
+      slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: { pageX: axis.x, pageY: axis.y / 2 }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#6b9fd6', '107, 159, 214');
 
       openColorpicker(nativeElement, fixture);
-      slBar.triggerEventHandler('mousedown', { 'pageX': axis.x + 50, 'pageY': axis.y / 2 });
+      slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: { pageX: axis.x + 50, pageY: axis.y / 2 }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#438ad6', '67, 138, 214');
 
       openColorpicker(nativeElement, fixture);
-      slBar.triggerEventHandler('mousedown', { 'pageX': axis.x + 50, 'pageY': axis.y });
+      slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: { pageX: axis.x + 50, pageY: axis.y }
+      });
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#285280', '40, 82, 128');
     }));
 
     it('should accept mouse dragging on saturation and lightness.', fakeAsync(() => {
       component.selectedOutputFormat = 'hex';
       openColorpicker(nativeElement, fixture);
-      let slBar = fixture.debugElement.query(By.css('.saturation-lightness'));
-      let axis = getElementCords(slBar);
-      slBar.triggerEventHandler('mousedown', { 'pageX': axis.x, 'pageY': axis.y });
+      let slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      let axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: {
+          pageX: axis.x,
+          pageY: axis.y
+        }
+      });
       fixture.detectChanges();
       mouseHelper(axis.x - 50, axis.y - 50, 'mousemove');
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#8babcb', '139, 171, 203');
 
       openColorpicker(nativeElement, fixture);
+      slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: {
+          pageX: axis.x + 50,
+          pageY: axis.y
+        }
+      });
       mouseHelper(axis.x + 50, axis.y, 'mousemove');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#285480', '40, 84, 128');
 
       openColorpicker(nativeElement, fixture);
+      slBar = getColorpickerContainer().querySelector('.saturation-lightness');
+      axis = getElementCoords(slBar);
+      SkyAppTestUtility.fireDomEvent(slBar, 'mousedown', {
+        customEventInit: {
+          pageX: axis.x + 50,
+          pageY: axis.y
+        }
+      });
       mouseHelper(axis.x + 50, axis.y, 'mouseup');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#285480', '40, 84, 128');
     }));
 
@@ -528,7 +606,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'hsla';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#123456');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'hsla(210,65%,20%,1)', '18, 52, 86');
     }));
 
@@ -537,7 +615,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'rgba';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#12345680');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'rgba(18,52,86,0.5)', '18, 52, 86, 0.5');
     }));
 
@@ -545,7 +623,7 @@ describe('Colorpicker Component', () => {
       component.selectedOutputFormat = 'cmyk';
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#654321');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'cmyk(0%,34%,67%,60%)', '101, 67, 33');
     }));
 
@@ -556,7 +634,7 @@ describe('Colorpicker Component', () => {
       setInputElementValue(nativeElement, 'green', '0');
       setInputElementValue(nativeElement, 'blue', '0');
       setInputElementValue(nativeElement, 'alpha', '0');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'hsla(0,0%,0%,0)', '0, 0, 0, 0');
     }));
 
@@ -571,7 +649,7 @@ describe('Colorpicker Component', () => {
       nativeElement.querySelector('input').dispatchEvent(inputEvent);
       nativeElement.querySelector('input').dispatchEvent(changeEvent);
       fixture.detectChanges();
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, 'rgba(69,35,252,1)', '69, 35, 252');
     }));
 
@@ -604,9 +682,14 @@ describe('Colorpicker Component', () => {
       tick();
       fixture.detectChanges();
       tick();
-      openColorpicker(nativeElement, fixture);
+
+      const buttonElem = nativeElement.querySelector('.sky-colorpicker-button') as HTMLElement;
+      buttonElem.click();
       fixture.detectChanges();
-      expect(nativeElement.querySelectorAll('.sky-colorpicker-hidden').length).toEqual(1);
+      tick();
+
+      const picker = getColorpickerContainer();
+      expect(picker).toBeNull();
     }));
 
     it('should show when input type is set to anything other than hidden.', fakeAsync(() => {
@@ -656,7 +739,6 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       tick();
       component.sendMessage(SkyColorpickerMessageType.Open);
-      tick();
       fixture.detectChanges();
       tick();
       verifyMenuVisibility();
@@ -666,12 +748,10 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       tick();
       component.sendMessage(SkyColorpickerMessageType.Open);
-      tick();
       fixture.detectChanges();
       tick();
       verifyMenuVisibility(true);
       component.sendMessage(SkyColorpickerMessageType.Close);
-      tick();
       fixture.detectChanges();
       tick();
       verifyMenuVisibility(false);
@@ -717,12 +797,11 @@ describe('Colorpicker Component', () => {
 
       openColorpicker(nativeElement, fixture);
 
-      const alphaBar = fixture.debugElement.query(By.css('.alpha'));
+      const alphaBar = getColorpickerContainer().querySelector('.alpha');
 
       expect(alphaBar).toBeTruthy();
 
-      const selector = `#${component.colorpickerComponent.skyColorpickerAlphaId}`;
-      const alphaInput = fixture.debugElement.query(By.css(selector));
+      const alphaInput = document.getElementById(component.colorpickerComponent.skyColorpickerAlphaId);
 
       expect(alphaInput).toBeTruthy();
     }));
@@ -778,7 +857,7 @@ describe('Colorpicker Component', () => {
       component.colorControl.setValue('#2889e5');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
-      closeColorpicker(nativeElement, fixture);
+      closeColorpicker();
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
     }));
 
@@ -791,11 +870,11 @@ describe('Colorpicker Component', () => {
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#2B7230');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
-      closeColorpicker(nativeElement, fixture);
+      closeColorpicker();
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
     }));
 
@@ -804,7 +883,7 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#2B7230');
-      applyColorpicker(nativeElement, fixture);
+      applyColorpicker();
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
     }));
 
@@ -829,7 +908,6 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       tick();
       component.sendMessage(SkyColorpickerMessageType.Open);
-      tick();
       fixture.detectChanges();
       tick();
       verifyMenuVisibility();

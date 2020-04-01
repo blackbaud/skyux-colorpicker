@@ -1,4 +1,6 @@
-<div>
+<div
+  class="sky-input-group"
+>
   <div
     [hidden]="true"
   >
@@ -6,10 +8,14 @@
   </div>
 
   <button
+    aria-haspopup="true"
     class="sky-colorpicker-button"
     type="button"
-    [attr.title]="'skyux_colorpicker_dropdown_button' | skyLibResources"
+    [attr.aria-controls]="colorpickerId"
+    [attr.aria-expanded]="isOpen"
     [attr.aria-label]="'skyux_colorpicker_dropdown_button' | skyLibResources"
+    [attr.id]="triggerButtonId"
+    [attr.title]="'skyux_colorpicker_dropdown_button' | skyLibResources"
     [style.background-color]="backgroundColorForDisplay"
     (click)="onButtonClick()"
     #triggerButtonRef
@@ -18,6 +24,8 @@
   <ng-template #colorpickerTemplateRef>
     <div
       class="sky-colorpicker-container"
+      [attr.aria-labelledby]="triggerButtonId"
+      [attr.id]="colorpickerId"
       [hidden]="!isVisible"
       #colorpickerRef
     >
