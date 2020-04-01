@@ -1,10 +1,10 @@
-import {
-  CommonModule
-} from '@angular/common';
-
+// spell-checker:ignore Colorpicker, Dropdown
 import {
   NgModule
 } from '@angular/core';
+import {
+  CommonModule
+} from '@angular/common';
 
 import {
   SkyAffixModule,
@@ -17,34 +17,30 @@ import {
 
 import {
   SkyColorpickerResourcesModule
-} from '../shared/colorpicker-resources.module';
-
-import {
-  SkyColorpickerInputDirective
-} from './colorpicker-input.directive';
-
-import {
-  SkyColorpickerSliderDirective
-} from './colorpicker-slider.directive';
-
-import {
-  SkyColorpickerTextDirective
-} from './colorpicker-text.directive';
+} from '../shared';
 
 import {
   SkyColorpickerComponent
 } from './colorpicker.component';
-
+import {
+  SkyColorpickerInputDirective
+} from './colorpicker-input.directive';
 import {
   SkyColorpickerService
 } from './colorpicker.service';
+import {
+  SkyColorpickerTextDirective
+} from './colorpicker-text.directive';
+import {
+  SkyColorpickerSliderDirective
+} from './colorpicker-slider.directive';
 
 @NgModule({
   declarations: [
     SkyColorpickerComponent,
     SkyColorpickerInputDirective,
-    SkyColorpickerSliderDirective,
-    SkyColorpickerTextDirective
+    SkyColorpickerTextDirective,
+    SkyColorpickerSliderDirective
   ],
   imports: [
     CommonModule,
@@ -59,6 +55,9 @@ import {
   ],
   providers: [
     SkyColorpickerService
+  ],
+  entryComponents: [
+    SkyColorpickerComponent
   ]
 })
 export class SkyColorpickerModule { }
