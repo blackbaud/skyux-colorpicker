@@ -23,7 +23,7 @@
 
   <ng-template #colorpickerTemplateRef>
     <div
-      class="sky-colorpicker-container"
+      class="sky-colorpicker-container sky-shadow"
       [attr.aria-labelledby]="triggerButtonId"
       [attr.id]="colorpickerId"
       [hidden]="!isVisible"
@@ -219,7 +219,6 @@
             type="button"
             [attr.aria-label]="'skyux_colorpicker_close' | skyLibResources"
             (click)="closePicker()"
-            #closeColorPicker
           >
             {{ 'skyux_colorpicker_close' | skyLibResources }}
           </button>

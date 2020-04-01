@@ -2,7 +2,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -16,10 +15,12 @@ import {
   SkyAffixer,
   SkyAffixService,
   SkyOverlayInstance,
-  SkyOverlayService
+  SkyOverlayService,
+  SkyCoreAdapterService
 } from '@skyux/core';
 
 import {
+  Observable,
   Subject
 } from 'rxjs';
 
@@ -99,9 +100,6 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   public triggerButtonId: string;
 
-  @ViewChild('closeColorPicker')
-  private closeColorPicker: ElementRef;
-
   @ViewChild('colorpickerTemplateRef', {
     read: TemplateRef
   })
@@ -119,8 +117,14 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     if (value) {
       this._colorpickerRef = value;
       this.destroyAffixer();
+
+      this.removePickerEventListeners();
+      this.pickerUnsubscribe = new Subject<void>();
+
       this.createAffixer();
       this.isVisible = true;
+
+      this.coreAdapter.getFocusableChildrenAndApplyFocus(value, '.sky-colorpicker', false);
     }
   }
 
@@ -136,10 +140,13 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   private overlay: SkyOverlayInstance;
 
+  private pickerUnsubscribe: Subject<void>;
+
   private _colorpickerRef: ElementRef;
 
   constructor(
     private affixService: SkyAffixService,
+    private coreAdapter: SkyCoreAdapterService,
     private overlayService: SkyOverlayService,
     private service: SkyColorpickerService
   ) {
@@ -154,17 +161,6 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     this.skyColorpickerAlphaId = 'sky-colorpicker-alpha-' + this.idIndex;
     this.colorpickerId = `sky-colorpicker-${this.idIndex}`;
     this.triggerButtonId = `sky-colorpicker-button-${this.idIndex}`;
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  public keyboardInput(event: any) {
-    /* Ignores in place for valid code that is only used in IE and Edge */
-    /* istanbul ignore next */
-    const code: string = event.code || event.key;
-    /* istanbul ignore else */
-    if (code && code.toLowerCase().indexOf('esc') === 0) {
-      this.closeColorPicker.nativeElement.click();
-    }
   }
 
   public setDialog(
@@ -199,11 +195,14 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       .subscribe((message: SkyColorpickerMessage) => {
         this.handleIncomingMessages(message);
       });
+
+    this.addTriggerButtonEventListeners();
   }
 
   public ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+    this.removePickerEventListeners();
     this.destroyAffixer();
     this.destroyOverlay();
   }
@@ -212,21 +211,12 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     this.sendMessage(SkyColorpickerMessageType.Open);
   }
 
-  public openPicker(): void {
-    if (!this.enablePicker) {
-      return;
-    }
-
-    this.isVisible = false;
-    this.destroyOverlay();
-    this.createOverlay();
-    this.isOpen = true;
-  }
-
   public closePicker() {
     this.setColorFromString(this.lastAppliedColor);
     this.destroyAffixer();
     this.destroyOverlay();
+    this.removePickerEventListeners();
+    this.triggerButtonRef.nativeElement.focus();
     this.isOpen = false;
   }
 
@@ -238,7 +228,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     this.selectedColorChanged.emit(this.selectedColor);
     this.selectedColorApplied.emit({ color: this.selectedColor });
     this.lastAppliedColor = this.selectedColor.rgbaText;
-    this.destroyOverlay();
+    this.closePicker();
   }
 
   public setColorFromString(value: string) {
@@ -349,6 +339,18 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     this.backgroundColorForDisplay = this.selectedColor.rgbaText;
   }
 
+  private openPicker(): void {
+    if (!this.enablePicker) {
+      return;
+    }
+
+    this.isVisible = false;
+    this.removePickerEventListeners();
+    this.destroyOverlay();
+    this.createOverlay();
+    this.isOpen = true;
+  }
+
   private sendMessage(type: SkyColorpickerMessageType) {
     this.messageStream.next({ type });
   }
@@ -380,7 +382,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     const affixer = this.affixService.createAffixer(this.colorpickerRef);
 
     affixer.placementChange
-      .takeUntil(this.ngUnsubscribe)
+      .takeUntil(this.pickerUnsubscribe)
       .subscribe((change) => {
         this.isVisible = (change.placement !== null);
       });
@@ -406,8 +408,9 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   private createOverlay(): void {
     const overlay = this.overlayService.create({
-      enableScroll: true,
-      enablePointerEvents: false
+      enableClose: false,
+      enablePointerEvents: false,
+      enableScroll: true
     });
 
     overlay.attachTemplate(this.colorpickerTemplateRef);
@@ -420,6 +423,26 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     if (this.overlay) {
       this.overlayService.close(this.overlay);
       this.overlay = undefined;
+    }
+  }
+
+  private addTriggerButtonEventListeners(): void {
+    Observable.fromEvent(window.document, 'keydown')
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((event: KeyboardEvent) => {
+        const key = event.key.toLowerCase();
+        if (key === 'escape') {
+          this.sendMessage(SkyColorpickerMessageType.Close);
+        }
+      });
+  }
+
+  private removePickerEventListeners(): void {
+    /* istanbul ignore else */
+    if (this.pickerUnsubscribe) {
+      this.pickerUnsubscribe.next();
+      this.pickerUnsubscribe.complete();
+      this.pickerUnsubscribe = undefined;
     }
   }
 }

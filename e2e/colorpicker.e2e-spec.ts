@@ -22,7 +22,7 @@ describe('Colorpicker', () => {
 
   it('should match previous opened screenshot', (done) => {
     element(by.css('sky-dropdown button')).click();
-    expect('#screenshot-colorpicker2').toMatchBaselineScreenshot(done, {
+    expect('#screenshot-colorpicker-opened').toMatchBaselineScreenshot(done, {
       screenshotName: 'colorpicker-opened'
     });
   });
@@ -42,7 +42,7 @@ describe('Colorpicker (small screens)', () => {
 
   it('should match previous opened screenshot', (done) => {
     element(by.css('sky-dropdown button')).click();
-    expect('#screenshot-colorpicker2').toMatchBaselineScreenshot(done, {
+    expect('#screenshot-colorpicker-opened').toMatchBaselineScreenshot(done, {
       screenshotName: 'colorpicker-opened-xs'
     });
   });

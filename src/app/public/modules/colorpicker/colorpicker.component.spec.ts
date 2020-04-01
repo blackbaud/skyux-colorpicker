@@ -103,25 +103,12 @@ describe('Colorpicker Component', () => {
     compFixture.detectChanges();
   }
 
-  function keyHelper(keyName: string, key: number, deprecatedKeyName: string) {
-    let document = <HTMLDocument>nativeElement.parentNode.parentNode.parentNode;
-    let keyPress: KeyboardEvent;
-    try { // Chrome, Safari, Firefox
-      keyPress = new KeyboardEvent('keydown', {
-        'key': keyName,
-        'code': keyName,
-        'view': window,
-        'bubbles': true,
-        'cancelable': true
-      });
-      document.dispatchEvent(keyPress);
-    } catch (error) {
-      // Deprecated browser API... IE
-      let keyPressDeprecated = document.createEvent('KeyboardEvent');
-      keyPressDeprecated.initKeyboardEvent('keydown', true, true, window,
-        deprecatedKeyName, 27, 'window', false, '');
-      document.dispatchEvent(keyPressDeprecated);
-    }
+  function keyHelper(keyName: string) {
+    SkyAppTestUtility.fireDomEvent(window.document, 'keydown', {
+      customEventInit: {
+        key: keyName
+      }
+    });
   }
 
   function mouseHelper(x: number, y: number, event: string) {
@@ -661,7 +648,7 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#086A93');
-      keyHelper('Escape', 27, 'Esc');
+      keyHelper('Escape');
       fixture.detectChanges();
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
     }));
