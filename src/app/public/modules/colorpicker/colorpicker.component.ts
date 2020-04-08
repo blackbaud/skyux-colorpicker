@@ -88,7 +88,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   public slider: SliderPosition;
   public initialColor: string;
   public lastAppliedColor: string;
-  public isVisible: boolean;
+  public isPickerVisible: boolean;
 
   public backgroundColorForDisplay: string = '#fff';
 
@@ -122,7 +122,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       this.pickerUnsubscribe = new Subject<void>();
 
       this.createAffixer();
-      this.isVisible = true;
+      this.isPickerVisible = true;
 
       this.coreAdapter.getFocusableChildrenAndApplyFocus(value, '.sky-colorpicker', false);
     }
@@ -207,7 +207,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     this.destroyOverlay();
   }
 
-  public onButtonClick(): void {
+  public onTriggerButtonClick(): void {
     this.sendMessage(SkyColorpickerMessageType.Open);
   }
 
@@ -248,6 +248,9 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       this.hsva = hsva;
       this.update();
     }
+
+    // Update trigger button's background color.
+    this.backgroundColorForDisplay = this.selectedColor.rgbaText;
   }
 
   public set hue(change: SkyColorpickerChangeAxis) {
@@ -335,8 +338,6 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       this.hsva.saturation * this.sliderDimMax.saturation - 8,
       (1 - this.hsva.value) * this.sliderDimMax.value - 8,
       this.hsva.alpha * this.sliderDimMax.alpha - 8);
-
-    this.backgroundColorForDisplay = this.selectedColor.rgbaText;
   }
 
   private openPicker(): void {
@@ -344,7 +345,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.isVisible = false;
+    this.isPickerVisible = false;
     this.removePickerEventListeners();
     this.destroyOverlay();
     this.createOverlay();
@@ -359,11 +360,15 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     /* tslint:disable-next-line:switch-default */
     switch (message.type) {
       case SkyColorpickerMessageType.Open:
-        this.openPicker();
+        if (!this.isOpen) {
+          this.openPicker();
+        }
         break;
 
       case SkyColorpickerMessageType.Close:
-        this.closePicker();
+        if (this.isOpen) {
+          this.closePicker();
+        }
         break;
 
       case SkyColorpickerMessageType.Reset:
@@ -384,7 +389,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     affixer.placementChange
       .takeUntil(this.pickerUnsubscribe)
       .subscribe((change) => {
-        this.isVisible = (change.placement !== null);
+        this.isPickerVisible = (change.placement !== null);
       });
 
     affixer.affixTo(this.triggerButtonRef.nativeElement, {
@@ -431,6 +436,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe((event: KeyboardEvent) => {
         const key = event.key.toLowerCase();
+        /* istanbul ignore else */
         if (key === 'escape') {
           this.sendMessage(SkyColorpickerMessageType.Close);
         }

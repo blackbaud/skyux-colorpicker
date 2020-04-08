@@ -17,7 +17,7 @@
     [attr.id]="triggerButtonId"
     [attr.title]="'skyux_colorpicker_dropdown_button' | skyLibResources"
     [style.background-color]="backgroundColorForDisplay"
-    (click)="onButtonClick()"
+    (click)="onTriggerButtonClick()"
     #triggerButtonRef
   ></button>
 
@@ -26,7 +26,7 @@
       class="sky-colorpicker-container sky-shadow"
       [attr.aria-labelledby]="triggerButtonId"
       [attr.id]="colorpickerId"
-      [hidden]="!isVisible"
+      [hidden]="!isPickerVisible"
       #colorpickerRef
     >
       <div

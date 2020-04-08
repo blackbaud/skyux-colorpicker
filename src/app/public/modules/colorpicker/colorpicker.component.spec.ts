@@ -948,6 +948,58 @@ describe('Colorpicker Component', () => {
       component.colorForm.setValue(component.newValues);
     });
 
+    it('should only open via message stream if picker is closed', fakeAsync(() => {
+      fixture.detectChanges();
+      tick();
+
+      const overlaySpy = spyOn(component.colorpickerComponent as any, 'createOverlay')
+        .and.callThrough();
+
+      component.sendMessage(SkyColorpickerMessageType.Open);
+      fixture.detectChanges();
+      tick();
+
+      verifyMenuVisibility();
+      expect(overlaySpy).toHaveBeenCalledTimes(1);
+      overlaySpy.calls.reset();
+
+      component.sendMessage(SkyColorpickerMessageType.Open);
+      fixture.detectChanges();
+      tick();
+
+      expect(overlaySpy).toHaveBeenCalledTimes(0);
+
+    }));
+
+    it('should only close via message stream if picker is opened', fakeAsync(() => {
+      fixture.detectChanges();
+      tick();
+
+      component.sendMessage(SkyColorpickerMessageType.Open);
+      fixture.detectChanges();
+      tick();
+
+      verifyMenuVisibility();
+
+      const overlaySpy = spyOn(component.colorpickerComponent as any, 'destroyOverlay')
+        .and.callThrough();
+
+      component.sendMessage(SkyColorpickerMessageType.Close);
+      fixture.detectChanges();
+      tick();
+
+      verifyMenuVisibility(false);
+      expect(overlaySpy).toHaveBeenCalledTimes(1);
+      overlaySpy.calls.reset();
+
+      component.sendMessage(SkyColorpickerMessageType.Close);
+      fixture.detectChanges();
+      tick();
+
+      expect(overlaySpy).toHaveBeenCalledTimes(0);
+
+    }));
+
   });
 
 });
