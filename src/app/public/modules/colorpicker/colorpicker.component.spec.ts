@@ -662,7 +662,7 @@ describe('Colorpicker Component', () => {
       expect(nativeElement.querySelectorAll('button:not([type="button"])').length).toBe(0);
     }));
 
-    it('should hide when input type is set to hidden.', fakeAsync(() => {
+    fit('should hide when input type is set to hidden.', fakeAsync(() => {
       component.inputType = 'hidden';
       const directiveEl = fixture.debugElement.query(By.directive(SkyColorpickerInputDirective));
       const directiveInstance = directiveEl.injector.get(SkyColorpickerInputDirective);
@@ -672,14 +672,9 @@ describe('Colorpicker Component', () => {
       tick();
       fixture.detectChanges();
       tick();
-
-      const buttonElem = nativeElement.querySelector('.sky-colorpicker-button') as HTMLElement;
-      buttonElem.click();
+      openColorpicker(nativeElement, fixture);
       fixture.detectChanges();
-      tick();
-
-      const picker = getColorpickerContainer();
-      expect(picker).toBeNull();
+      expect(nativeElement.querySelectorAll('.sky-colorpicker-hidden').length).toEqual(1);
     }));
 
     it('should show when input type is set to anything other than hidden.', fakeAsync(() => {

@@ -92,8 +92,6 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   public backgroundColorForDisplay: string = '#fff';
 
-  public enablePicker: boolean = true;
-
   public colorpickerId: string;
 
   public isOpen: boolean = false;
@@ -341,10 +339,6 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   }
 
   private openPicker(): void {
-    if (!this.enablePicker) {
-      return;
-    }
-
     this.isPickerVisible = false;
     this.removePickerEventListeners();
     this.destroyOverlay();

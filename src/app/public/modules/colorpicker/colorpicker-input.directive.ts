@@ -163,12 +163,12 @@ export class SkyColorpickerInputDirective
         this.getString('skyux_colorpicker_input_default_label'));
     }
 
-    const typeAttr = element.getAttribute('type');
-    if (typeAttr && typeAttr === 'hidden') {
-      this.skyColorpickerInput.enablePicker = false;
-    } else {
-      this.skyColorpickerInput.enablePicker = true;
-    }
+    // const typeAttr = element.getAttribute('type');
+    // if (typeAttr && typeAttr === 'hidden') {
+    //   this.skyColorpickerInput.enablePicker = false;
+    // } else {
+    //   this.skyColorpickerInput.enablePicker = true;
+    // }
 
     element.setAttribute('readonly', 'true');
     this.renderer.addClass(element, 'sky-colorpicker-input');
