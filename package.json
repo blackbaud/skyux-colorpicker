@@ -1,6 +1,6 @@
 {
   "name": "@skyux/colorpicker",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "SKY UX Colorpicker",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
@@ -50,7 +50,7 @@
     "@skyux/assets": "3.1.0",
     "@skyux/colorpicker": "3.2.1",
     "@skyux/config": "3.8.1",
-    "@skyux/core": "3.14.1",
+    "@skyux/core": "3.14.2",
     "@skyux/http": "3.9.0",
     "@skyux/i18n": "3.10.0",
     "@skyux/indicators": "3.1.3",
