@@ -1,6 +1,6 @@
 # 3.3.1 (2020-04-13)
 
-- Fixed the colorpicker component to properly set ARIA attributes when colorpicker is closed. [#38](https://github.com/blackbaud/skyux-colorpicker/pull/38)
+- Fixed the colorpicker component to properly set ARIA attributes when the colorpicker is closed. [#38](https://github.com/blackbaud/skyux-colorpicker/pull/38)
 
 # 3.3.0 (2020-04-08)
 
