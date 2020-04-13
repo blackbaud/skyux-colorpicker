@@ -96,6 +96,8 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   public isOpen: boolean = false;
 
+  public isVisible: boolean = true;
+
   public triggerButtonId: string;
 
   @ViewChild('colorpickerTemplateRef', {
