@@ -1,6 +1,6 @@
 # 3.3.2 (2020-04-14)
 
-- Fixed the colorpicker to hide the launch and reset buttons when the input element's `type` is `hidden`.". [#40](https://github.com/blackbaud/skyux-colorpicker/pull/40)
+- Fixed the colorpicker to hide the launch and reset buttons when the input element's `type` is `hidden`. [#40](https://github.com/blackbaud/skyux-colorpicker/pull/40)
 
 # 3.3.1 (2020-04-13)
 
