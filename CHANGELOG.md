@@ -1,3 +1,13 @@
+# 4.0.0 (2020-05-21)
+
+### New features
+
+- Updated the pipeline to transpile to the [Angular Package Format](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview). [#43](https://github.com/blackbaud/skyux-colorpicker/pull/43)
+
+### Breaking changes
+
+- Dropped support for `rxjs@5`. Consumers can install `rxjs-compat@^6` to support older versions of `rxjs`. [#43](https://github.com/blackbaud/skyux-colorpicker/pull/43)
+
 # 4.0.0-rc.0 (2020-04-17)
 
 ### New features
