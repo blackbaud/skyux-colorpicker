@@ -1,6 +1,12 @@
 <div
   class="sky-input-group"
-  [ngClass]="{ 'sky-colorpicker-hidden': !isVisible }">
+  [ngClass]="{ 'sky-colorpicker-hidden': !isVisible }"
+>
+  <span
+    aria-hidden="true"
+    class="checkered-background"
+  >
+  </span>
   <ng-content>
   </ng-content>
   <sky-dropdown
@@ -175,12 +181,12 @@
       </div>
     </sky-dropdown-menu>
   </sky-dropdown>
-<div *ngIf="showResetButton">
-  <button
-    class="sky-colorpicker-reset-button"
-    type="button"
-    [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
-    (click)="resetPickerColor()">
-  </button>
-</div>
+  <div *ngIf="showResetButton">
+    <button
+      class="sky-colorpicker-reset-button"
+      type="button"
+      [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
+      (click)="resetPickerColor()">
+    </button>
+  </div>
 </div>
