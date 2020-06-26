@@ -787,7 +787,7 @@ describe('Colorpicker Component', () => {
       openColorpicker(nativeElement, fixture);
 
       const alphaBar = getColorpickerContainer().querySelector('.alpha');
-      const alphaChannelBackground = fixture.debugElement.query(By.css('.checkered-background'));
+      const alphaChannelBackground = fixture.debugElement.query(By.css('.sky-colorpicker-checkered-background'));
 
       expect(alphaBar).toBeTruthy();
       expect(alphaChannelBackground).toBeTruthy();
@@ -804,7 +804,7 @@ describe('Colorpicker Component', () => {
       openColorpicker(nativeElement, fixture);
 
       const alphaBar = getColorpickerContainer().querySelector('.alpha');
-      const alphaChannelBackground = fixture.debugElement.query(By.css('.checkered-background'));
+      const alphaChannelBackground = fixture.debugElement.query(By.css('.sky-colorpicker-checkered-background'));
 
       expect(alphaBar).toBeFalsy();
       expect(alphaChannelBackground).toBeFalsy();
