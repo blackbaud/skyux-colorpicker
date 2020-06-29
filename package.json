@@ -1,6 +1,6 @@
 {
   "name": "@skyux/colorpicker",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "SKY UX Colorpicker",
   "scripts": {
     "build": "skyux build-public-library --fullTemplateTypeChecking",
@@ -45,7 +45,7 @@
     "@skyux-sdk/e2e": "4.0.0",
     "@skyux-sdk/testing": "4.0.0",
     "@skyux/assets": "4.0.0",
-    "@skyux/colorpicker": "4.0.1",
+    "@skyux/colorpicker": "4.0.2",
     "@skyux/config": "4.0.0",
     "@skyux/core": "4.1.0",
     "@skyux/http": "4.0.0",
