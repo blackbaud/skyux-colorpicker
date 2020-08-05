@@ -60,7 +60,10 @@ const SKY_COLORPICKER_VALIDATOR = {
 // tslint:enable
 const SKY_COLORPICKER_DEFAULT_COLOR = '#FFFFFF';
 
-@Directive({
+  /**
+   * Creates the colorpicker element and dropdown.
+   */
+  @Directive({
   selector: '[skyColorpickerInput]',
   providers: [
     SKY_COLORPICKER_VALUE_ACCESSOR,
@@ -74,17 +77,19 @@ export class SkyColorpickerInputDirective
 
   /**
    * Creates the colorpicker element and dropdown. Place this attribute on an `input` element
-   * or `button` element, and wrap the element in a `sky-colorpicker` component. This attribute
-   * must be set to the instance of the `sky-colorpicker` component.
+   * or `button` element, wrap the element in a `sky-colorpicker` component, and set the attribute
+   * to the instance of the `sky-colorpicker` component.
+   * @required
    */
   @Input()
   public skyColorpickerInput: SkyColorpickerComponent;
 
   /**
-   * @deprecated Specifies an initial color to load in the colorpicker. Use a reactive or
+   * Specifies an initial color to load in the colorpicker. Use a reactive or
    * template-driven form to set this value. This property is deprecated. As an alternative,
    * we recommend the `formControlName` property on reactive forms or `ngModel` on
    * template-driven forms. See the demo for examples.
+   * @deprecated
    */
   @Input()
   public set initialColor(value: string) {
@@ -99,8 +104,9 @@ export class SkyColorpickerInputDirective
   }
 
   /**
-   * @deprecated This property is deprecated and does not affect the colorpicker.
-   * We recommend against using it
+   * This property is deprecated and does not affect the colorpicker.
+   * We recommend against using it.
+   * @deprecated
    */
   @Input()
   public returnFormat = 'rgba';
@@ -109,8 +115,7 @@ export class SkyColorpickerInputDirective
    * Specifies the format to use for the color when the colorpicker uses a native input
    * element such as a standard text input or a button. This property accepts `rgba`, `hex`,
    * or `hsla`, but we do not recommend using it because users never see or use its value.
-   * Instead, if you need to access this format value, see the demo for an example of the
-   * recommended way to access the value.
+   * Instead, if you need to access this format value, see the demo for an example.
    */
   @Input()
   public outputFormat = 'rgba';
