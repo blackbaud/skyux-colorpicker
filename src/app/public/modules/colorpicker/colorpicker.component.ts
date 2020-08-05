@@ -150,6 +150,8 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       this.removePickerEventListeners();
       this.pickerUnsubscribe = new Subject<void>();
 
+      // Ensure the colorpicker has fully rendered before adding the affixer. Added to address a
+      // race condition when running under production conditions.
       setTimeout(() => {
         this.createAffixer();
         this.isPickerVisible = true;
