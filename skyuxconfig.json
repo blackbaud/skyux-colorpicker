@@ -15,11 +15,22 @@
     }
   },
   "app": {
-    "styles": []
+    "styles": [
+      "@skyux/docs-tools/css/docs-tools.css"
+    ]
   },
   "host": {
     "frameOptions": {
       "none": true
+    },
+    "url": "https://developer.blackbaud.com"
+  },
+  "omnibar": {
+    "experimental": true
+  },
+  "params": {
+    "svcid": {
+      "value": "skyux"
     }
   }
 }

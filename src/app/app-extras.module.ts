@@ -10,10 +10,25 @@ import {
   SkyColorpickerModule
 } from './public/public_api';
 
+import {
+  SkyDocsToolsModule,
+  SkyDocsToolsOptions
+} from '@skyux/docs-tools';
+
 @NgModule({
   exports: [
     SkyAppLinkModule,
-    SkyColorpickerModule
+    SkyColorpickerModule,
+    SkyDocsToolsModule
+  ],
+  providers: [
+    {
+      provide: SkyDocsToolsOptions,
+      useValue: {
+        gitRepoUrl: 'https://github.com/blackbaud/skyux-colorpicker',
+        packageName: `skyux/colorpicker`
+      }
+    }
   ]
 })
 export class AppExtrasModule { }

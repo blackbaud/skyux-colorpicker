@@ -82,15 +82,38 @@ let componentIdIndex = 0;
 })
 
 export class SkyColorpickerComponent implements OnInit, OnDestroy {
+  /**
+   * Fires when users select a color within the colorpicker.
+   */
   @Output()
   public selectedColorChanged = new EventEmitter<SkyColorpickerOutput>();
 
+  /**
+   * Fires when users click Apply in the colorpicker to apply a color.
+   */
   @Output()
   public selectedColorApplied = new EventEmitter<SkyColorpickerResult>();
 
+  /**
+   * Specifies a message stream to toggle the reset button on and off. Both events
+   * return an object with the following properties:
+   * ```{
+   * hslaText: string
+   * rgbaText: string
+   * cmykText: string
+   * hsva: { hue:  number, saturation: number, value: number,      alpha: number}
+   * rgba: { red:  number, green: number,      blue: number,       alpha: number}
+   * hsla: { hue:  number, saturation: number, lightness: number,  alpha: number}
+   * cmyk: { cyan: number, magenta: number,    yellow: number,     key: number  }
+   * hex:  string
+   * }```
+   */
   @Input()
   public messageStream = new Subject<SkyColorpickerMessage>();
 
+  /**
+   * Indicates whether to display a reset button to let users return to the default color.
+   */
   @Input()
   public showResetButton = true;
 
