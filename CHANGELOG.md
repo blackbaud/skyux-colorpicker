@@ -1,6 +1,6 @@
 # 4.0.4 (2020-08-05)
 
-- Fixed the colorpicker component to not positions its overlay until all contents have fully rendered. [#62](https://github.com/blackbaud/skyux-colorpicker/pull/62)
+- Fixed the colorpicker component to position its overlay after the contents fully render. [#62](https://github.com/blackbaud/skyux-colorpicker/pull/62)
 
 # 4.0.3 (2020-06-29)
 
