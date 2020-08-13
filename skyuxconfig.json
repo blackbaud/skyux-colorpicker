@@ -41,15 +41,6 @@
     "url": "https://developer.blackbaud.com",
     "frameOptions": {
       "none": true
-    },
-    "url": "https://developer.blackbaud.com"
-  },
-  "omnibar": {
-    "experimental": true
-  },
-  "params": {
-    "svcid": {
-      "value": "skyux"
     }
   }
 }
