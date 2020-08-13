@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -65,7 +66,7 @@ import {
 } from './types/colorpicker-result';
 
 import {
- SkyColorpickerService
+  SkyColorpickerService
 } from './colorpicker.service';
 
 import {
@@ -177,10 +178,15 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       this.removePickerEventListeners();
       this.pickerUnsubscribe = new Subject<void>();
 
-      this.createAffixer();
-      this.isPickerVisible = true;
+      // Ensure the colorpicker has fully rendered before adding the affixer. Added to address a
+      // race condition when running under production conditions.
+      setTimeout(() => {
+        this.createAffixer();
+        this.isPickerVisible = true;
 
-      this.coreAdapter.getFocusableChildrenAndApplyFocus(value, '.sky-colorpicker', false);
+        this.coreAdapter.getFocusableChildrenAndApplyFocus(value, '.sky-colorpicker', false);
+        this.changeDetector.markForCheck();
+      });
     }
   }
 
@@ -202,6 +208,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   constructor(
     private affixService: SkyAffixService,
+    private changeDetector: ChangeDetectorRef,
     private coreAdapter: SkyCoreAdapterService,
     private overlayService: SkyOverlayService,
     private service: SkyColorpickerService
