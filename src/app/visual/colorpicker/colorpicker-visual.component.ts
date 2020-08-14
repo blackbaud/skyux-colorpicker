@@ -9,7 +9,7 @@ import {
 export class ColorpickerVisualComponent {
   public color1: any;
   public selectedColor1: string = '#2889e5';
-  public selectedOutputFormat1: string = 'rgba';
+  public selectedOutputFormat1: string = 'hex';
   public presetColors1 = [
     '#333333',
     '#888888',
