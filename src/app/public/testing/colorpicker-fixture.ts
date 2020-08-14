@@ -39,7 +39,7 @@ export class SkyColorpickerFixture {
    * Set the colorpicker's color hex code.
    * @param hexValue The new color hex code. Must inculde '#'.
    */
-  public async setColorFromHexValue(hexValue: string): Promise<any> {
+  public async setValueFromHexValue(hexValue: string): Promise<any> {
     await this.clickColorpickerButtonEl();
 
     const hexInput = document.querySelector('input[id^=sky-colorpicker-hex-]') as HTMLInputElement;
@@ -54,24 +54,28 @@ export class SkyColorpickerFixture {
 
   /**
    * Set the colorpicker's color RGB values.
-   * @param r The red color value.
-   * @param g The green color value.
-   * @param b The blue color value.
+   * @param red The red color value.
+   * @param green The green color value.
+   * @param blue The blue color value.
+   * @param alpha The alpha channel value.
    */
-  public async setColorFromRGBValue(r: number, g: number, b: number): Promise<any> {
+  public async setValueFromRGBAValue(red: number, green: number, blue: number, alpha: number): Promise<any> {
     await this.clickColorpickerButtonEl();
 
     const rInput = document.querySelector('input[id^=sky-colorpicker-red-]') as HTMLInputElement;
     const gInput = document.querySelector('input[id^=sky-colorpicker-green-]') as HTMLInputElement;
     const bInput = document.querySelector('input[id^=sky-colorpicker-blue-]') as HTMLInputElement;
+    const aInput = document.querySelector('input[id^=sky-colorpicker-alpha-]') as HTMLInputElement;
 
-    rInput.value = r.toString();
-    gInput.value = g.toString();
-    bInput.value = b.toString();
+    rInput.value = red.toString();
+    gInput.value = green.toString();
+    bInput.value = blue.toString();
+    aInput.value = alpha.toString();
 
     SkyAppTestUtility.fireDomEvent(rInput, 'input');
     SkyAppTestUtility.fireDomEvent(gInput, 'input');
     SkyAppTestUtility.fireDomEvent(bInput, 'input');
+    SkyAppTestUtility.fireDomEvent(aInput, 'input');
 
     await this.clickColorpickerApplyButtonEl();
 
@@ -82,15 +86,13 @@ export class SkyColorpickerFixture {
    * Set the colorpicker's color to the provided preset color at the given index.
    * @param presetIndex The index of the color in the `presetColors` list to select.
    */
-  public async setColorFromPresets(presetIndex: number): Promise<any> {
+  public async setValueFromPresets(presetIndex: number): Promise<any> {
     await this.clickColorpickerButtonEl();
 
     const presetColors = document.querySelectorAll('.sky-preset-color');
     const presetColor = presetColors && presetColors[presetIndex] as HTMLButtonElement;
 
     if (presetColor) {
-      console.log('le color');
-      console.log(presetColor);
       presetColor.click();
       this.fixture.detectChanges();
     }

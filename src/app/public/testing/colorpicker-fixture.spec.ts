@@ -102,7 +102,7 @@ describe('Colorpicker fixture', () => {
     await fixture.whenStable();
     expect(colorpicker.value).toEqual(fixture.componentInstance.hexColor);
 
-    await colorpicker.setColorFromHexValue(newColor);
+    await colorpicker.setValueFromHexValue(newColor);
 
     expect(colorpicker.value).toEqual(newColor);
     expect(fixture.componentInstance.onColorChanged).toHaveBeenCalled();
@@ -132,7 +132,7 @@ describe('Colorpicker fixture', () => {
     await fixture.whenStable();
     expect(colorpicker.value).toEqual(currentColor);
 
-    await colorpicker.setColorFromRGBValue(25, 25, 25);
+    await colorpicker.setValueFromRGBAValue(25, 25, 25, 1);
 
     expect(colorpicker.value).toEqual(newColor);
     expect(fixture.componentInstance.onColorChanged).toHaveBeenCalled();
@@ -157,7 +157,7 @@ describe('Colorpicker fixture', () => {
     await fixture.whenStable();
     expect(colorpicker.value).toEqual(fixture.componentInstance.hexColor);
 
-    await colorpicker.setColorFromPresets(3);
+    await colorpicker.setValueFromPresets(3);
 
     expect(colorpicker.value).toEqual(fixture.componentInstance.presetColors[3]);
     expect(fixture.componentInstance.onColorChanged).toHaveBeenCalled();
@@ -182,7 +182,7 @@ describe('Colorpicker fixture', () => {
     await fixture.whenStable();
     expect(colorpicker.value).toEqual(fixture.componentInstance.hexColor);
 
-    await colorpicker.setColorFromPresets(6);
+    await colorpicker.setValueFromPresets(6);
 
     expect(colorpicker.value).toEqual(fixture.componentInstance.hexColor);
     expect(fixture.componentInstance.onColorApplied).toHaveBeenCalled();
