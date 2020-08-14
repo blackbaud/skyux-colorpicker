@@ -53,7 +53,7 @@ class TestComponent {
   public onColorApplied = () => {};
 }
 
-fdescribe('Colorpicker fixture', () => {
+describe('Colorpicker fixture', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
