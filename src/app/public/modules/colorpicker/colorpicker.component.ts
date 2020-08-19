@@ -89,24 +89,13 @@ let componentIdIndex = 0;
 
 export class SkyColorpickerComponent implements OnInit, OnDestroy {
   /**
-   * Fires when users select a color in the colorpicker. Both events
-   * return an object with the following properties:
-   * ```{
-   * hslaText: string
-   * rgbaText: string
-   * cmykText: string
-   * hsva: { hue:  number, saturation: number, value: number,      alpha: number}
-   * rgba: { red:  number, green: number,      blue: number,       alpha: number}
-   * hsla: { hue:  number, saturation: number, lightness: number,  alpha: number}
-   * cmyk: { cyan: number, magenta: number,    yellow: number,     key: number  }
-   * hex:  string
-   * }```
+   * Fires when users select a color in the colorpicker.
    */
   @Output()
   public selectedColorChanged = new EventEmitter<SkyColorpickerOutput>();
 
   /**
-   * Fires when users select Apply in the colorpicker to apply a color.
+   * Fires when users select **Apply** in the colorpicker to apply a color.
    */
   @Output()
   public selectedColorApplied = new EventEmitter<SkyColorpickerResult>();
