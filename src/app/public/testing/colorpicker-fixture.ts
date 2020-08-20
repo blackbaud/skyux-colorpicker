@@ -39,7 +39,7 @@ export class SkyColorpickerFixture {
    * Set the colorpicker's color hex code.
    * @param hexValue The new color hex code. Must inculde '#'.
    */
-  public async setValueFromHexValue(hexValue: string): Promise<any> {
+  public async setValueFromHex(hexValue: string): Promise<any> {
     await this.clickColorpickerButtonEl();
 
     const hexInput = document.querySelector('input[id^=sky-colorpicker-hex-]') as HTMLInputElement;
@@ -59,7 +59,7 @@ export class SkyColorpickerFixture {
    * @param blue The blue color value.
    * @param alpha The alpha channel value.
    */
-  public async setValueFromRGBAValue(red: number, green: number, blue: number, alpha: number): Promise<any> {
+  public async setValueFromRGBA(red: number, green: number, blue: number, alpha: number): Promise<any> {
     await this.clickColorpickerButtonEl();
 
     const rInput = document.querySelector('input[id^=sky-colorpicker-red-]') as HTMLInputElement;
