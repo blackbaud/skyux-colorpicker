@@ -1,10 +1,10 @@
 import { SkyColorpickerOutput } from './colorpicker-output';
 /**
- * Specifies the selected color.
+ * Indicates the color that users apply when they select Apply in the colorpicker.
  */
 export interface SkyColorpickerResult {
   /**
-   * Emits an object that describes the color that users select in the colorpicker.
+   * Describes the color that users select in the colorpicker.
    */
   color: SkyColorpickerOutput;
 }

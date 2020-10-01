@@ -15,7 +15,9 @@ export interface SkyColorpickerHsva {
    */
   saturation: number;
   /**
-   * Specifies the value.
+   * Specifies the value, which is a percentage value that describes the brightness
+   * or intensity of the color where 0 is completely black and 100 is the brightest
+   * and reveals the most color.
    */
   value: number;
   /**
