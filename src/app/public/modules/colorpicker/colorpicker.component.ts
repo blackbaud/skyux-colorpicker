@@ -8,7 +8,8 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
 
 import {
@@ -19,6 +20,10 @@ import {
   SkyOverlayService,
   SkyCoreAdapterService
 } from '@skyux/core';
+
+import {
+  SkyThemeService
+} from '@skyux/theme';
 
 import {
   fromEvent,
@@ -84,10 +89,11 @@ let componentIdIndex = 0;
 @Component({
   selector: 'sky-colorpicker',
   templateUrl: './colorpicker.component.html',
-  styleUrls: ['./colorpicker.component.scss']
+  styleUrls: ['./colorpicker.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-
 export class SkyColorpickerComponent implements OnInit, OnDestroy {
+
   /**
    * Fires when users select a color in the colorpicker.
    */
@@ -201,7 +207,8 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private coreAdapter: SkyCoreAdapterService,
     private overlayService: SkyOverlayService,
-    private service: SkyColorpickerService
+    private service: SkyColorpickerService,
+    public themeSvc: SkyThemeService
   ) {
     componentIdIndex++;
 

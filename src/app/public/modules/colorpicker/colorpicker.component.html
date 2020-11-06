@@ -26,11 +26,17 @@
 
   <ng-template #colorpickerTemplateRef>
     <div
-      class="sky-colorpicker-container sky-shadow"
+      class="sky-colorpicker-container"
       role="dialog"
       [attr.aria-labelledby]="triggerButtonId"
       [attr.id]="colorpickerId"
       [hidden]="!isPickerVisible"
+      [ngClass]="{
+        'sky-shadow':
+          (themeSvc?.settingsChange | async)?.currentSettings.theme.name === 'default',
+        'sky-elevation-4':
+          (themeSvc?.settingsChange | async)?.currentSettings.theme.name === 'modern'
+      }"
       #colorpickerRef
     >
       <div
@@ -98,6 +104,117 @@
         </div>
 
         <div
+          class="rgba-text"
+        >
+          <div
+            class="box"
+          >
+            <sky-input-box>
+              <label
+                class="sky-control-label"
+                [attr.aria-label]="'skyux_colorpicker_aria_hex' | skyLibResources"
+                [attr.for]="skyColorpickerHexId"
+              >
+                {{ 'skyux_colorpicker_hex' | skyLibResources }}
+              </label>
+              <input
+                class="sky-form-control"
+                pattern="^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                [attr.id]="skyColorpickerHexId"
+                [skyColorpickerText]
+                [value]="hexText"
+                (newColorContrast)="hex=$event"
+              />
+            </sky-input-box>
+            <sky-input-box>
+              <label
+                class="sky-control-label"
+                [attr.aria-label]="'skyux_colorpicker_aria_red' | skyLibResources"
+                [attr.for]="skyColorpickerRedId"
+              >
+                {{ 'skyux_colorpicker_red' | skyLibResources }}
+              </label>
+              <input
+                class="sky-form-control"
+                max="255"
+                min="0"
+                pattern="[0-9]*"
+                type="number"
+                [attr.id]="skyColorpickerRedId"
+                [maxRange]="255"
+                [skyColorpickerText]
+                [value]="rgbaText?.red"
+                (newColorContrast)="red=$event"
+              />
+            </sky-input-box>
+            <sky-input-box>
+              <label
+                class="sky-control-label"
+                [attr.aria-label]="'skyux_colorpicker_aria_green' | skyLibResources"
+                [attr.for]="skyColorpickerGreenId"
+              >
+                {{ 'skyux_colorpicker_green' | skyLibResources }}
+              </label>
+              <input
+                class="sky-form-control"
+                max="255"
+                min="0"
+                pattern="[0-9]*"
+                type="number"
+                [attr.id]="skyColorpickerGreenId"
+                [maxRange]="255"
+                [skyColorpickerText]
+                [value]="rgbaText?.green"
+                (newColorContrast)="green=$event"
+              />
+            </sky-input-box>
+            <sky-input-box>
+              <label
+                class="sky-control-label"
+                [attr.aria-label]="'skyux_colorpicker_aria_blue' | skyLibResources"
+                [attr.for]="skyColorpickerBlueId"
+              >
+                {{ 'skyux_colorpicker_blue' | skyLibResources }}
+              </label>
+              <input
+                class="sky-form-control"
+                max="255"
+                min="0"
+                pattern="[0-9]*"
+                type="number"
+                [attr.id]="skyColorpickerBlueId"
+                [maxRange]="255"
+                [skyColorpickerText]
+                [value]="rgbaText?.blue"
+                (newColorContrast)="blue=$event"
+              />
+            </sky-input-box>
+            <sky-input-box>
+              <label *ngIf="this.allowTransparency"
+                class="sky-control-label"
+                [attr.aria-label]="'skyux_colorpicker_aria_alpha' | skyLibResources"
+                [attr.for]="skyColorpickerAlphaId"
+              >
+                {{ 'skyux_colorpicker_alpha' | skyLibResources }}
+              </label>
+              <input *ngIf="this.allowTransparency"
+                class="sky-form-control"
+                max="1"
+                min="0"
+                pattern="[0-9]+([\.,][0-9]{1,2})?"
+                step="0.1"
+                type="number"
+                [attr.id]="skyColorpickerAlphaId"
+                [maxRange]="1"
+                [skyColorpickerText]
+                [value]="rgbaText?.alpha"
+                (newColorContrast)="alphaColor=$event"
+              />
+            </sky-input-box>
+          </div>
+        </div>
+
+        <!-- <div
           class="rgba-text"
         >
           <div
@@ -190,22 +307,32 @@
               (newColorContrast)="alphaColor=$event"
             />
           </div>
-        </div>
+        </div> -->
 
         <div *ngIf="presetColors && presetColors.length"
           class="sky-colorpicker-preset-color-area"
         >
           <button *ngFor="let color of presetColors | slice:0:12; let i = index;"
-            class="sky-preset-color"
             type="button"
-            [attr.aria-label]="('skyux_colorpicker_preset_color' | skyLibResources) + ' ' + color"[style.backgroundColor]="color"
+            [attr.aria-label]="('skyux_colorpicker_preset_color' | skyLibResources) + ' ' + color"
+            [ngClass]="{
+              'sky-preset-color':
+                (themeSvc?.settingsChange | async)?.currentSettings.theme.name === 'default',
+              'sky-btn sky-btn-link':
+                (themeSvc?.settingsChange | async)?.currentSettings.theme.name === 'modern'
+            }"
+            [style.backgroundColor]="color"
             (click)="setColorFromString(color)"
           ></button>
         </div>
       </div>
 
       <div
-        class="sky-colorpicker-footer sky-padding-even-large"
+        class="sky-colorpicker-footer"
+        [ngClass]="{
+          'sky-padding-even-large':
+            (themeSvc?.settingsChange | async)?.currentSettings.theme.name === 'default'
+        }"
       >
         <section
           class="sky-colorpicker-column"
