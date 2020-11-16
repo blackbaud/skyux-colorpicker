@@ -284,6 +284,7 @@
 .sky-theme-modern {
 
   .sky-colorpicker {
+    background-color: initial;
     width: 310px;
 
     .saturation-lightness {
@@ -337,25 +338,27 @@
 
   .rgba-text {
     padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
-    .box {
-      flex-wrap: wrap;
-      padding: 0;
+    sky-input-box:first-child {
+      width: 100%;
+      margin: 0 0 10px 0;
+    }
 
-      sky-input-box:first-child::after {
-        content: '';
-        width: 100%;
-        order: 1;
-      }
+    sky-input-box:not(:first-child) {
+      flex: 1;
+      margin: 0 10px 10px 0;
+    }
 
-      input {
-        margin-right: 10px;
-      }
+    sky-input-box:last-child {
+      margin: 0 0 10px 0;
     }
   }
 
   .sky-colorpicker-preset-color-area {
-    padding: 20px 10px;
+    padding: 10px 10px 20px 10px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
     row-gap: 15px;

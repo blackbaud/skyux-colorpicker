@@ -22,6 +22,7 @@ import {
 } from '@skyux/core';
 
 import {
+  SkyTheme,
   SkyThemeService
 } from '@skyux/theme';
 
@@ -196,6 +197,8 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   private affixer: SkyAffixer;
 
+  private currentTheme: SkyTheme;
+
   private overlay: SkyOverlayInstance;
 
   private pickerUnsubscribe: Subject<void>;
@@ -257,6 +260,24 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       });
 
     this.addTriggerButtonEventListeners();
+
+    if (this.themeSvc) {
+      this.themeSvc.settingsChange
+        .pipe(
+          takeUntil(this.ngUnsubscribe)
+        )
+        .subscribe((themeSettings) => {
+          this.currentTheme = themeSettings.currentSettings.theme;
+
+          // Hue/alpha slider bars have different widths in Modern theme.
+          if (this.currentTheme === SkyTheme.presets.modern) {
+            this.sliderDimMax = new SliderDimension(174, 270, 170, 174);
+          } else {
+            this.sliderDimMax = new SliderDimension(182, 270, 170, 182);
+          }
+          this.updateSlider();
+        });
+    }
   }
 
   public ngOnDestroy() {
@@ -393,11 +414,18 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
       this.alphaChannel === 'hex8');
     this.selectedColor = this.service.skyColorpickerOut(this.hsva);
 
-    this.slider = new SliderPosition(
-      (this.hsva.hue) * this.sliderDimMax.hue - 8,
-      this.hsva.saturation * this.sliderDimMax.saturation - 8,
-      (1 - this.hsva.value) * this.sliderDimMax.value - 8,
-      this.hsva.alpha * this.sliderDimMax.alpha - 8);
+    this.updateSlider();
+  }
+
+  private updateSlider(): void {
+    if (this.hsva && this.sliderDimMax) {
+      this.slider = new SliderPosition(
+        (this.hsva.hue) * this.sliderDimMax.hue - 8,
+        this.hsva.saturation * this.sliderDimMax.saturation - 8,
+        (1 - this.hsva.value) * this.sliderDimMax.value - 8,
+        this.hsva.alpha * this.sliderDimMax.alpha - 8
+      );
+    }
   }
 
   private openPicker(): void {
