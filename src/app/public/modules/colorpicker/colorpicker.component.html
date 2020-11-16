@@ -32,8 +32,8 @@
       [attr.id]="colorpickerId"
       [hidden]="!isPickerVisible"
       [ngClass]="{
-        'sky-shadow' : currentTheme.name === 'default',
-        'sky-elevation-4' : currentTheme.name === 'modern'
+        'sky-shadow' : themeName === 'default',
+        'sky-elevation-4' : themeName === 'modern'
       }"
       #colorpickerRef
     >
@@ -184,15 +184,15 @@
               (newColorContrast)="blue=$event"
             />
           </sky-input-box>
-          <sky-input-box>
-            <label *ngIf="this.allowTransparency"
+          <sky-input-box *ngIf="this.allowTransparency">
+            <label
               class="sky-control-label"
               [attr.aria-label]="'skyux_colorpicker_aria_alpha' | skyLibResources"
               [attr.for]="skyColorpickerAlphaId"
             >
               {{ 'skyux_colorpicker_alpha' | skyLibResources }}
             </label>
-            <input *ngIf="this.allowTransparency"
+            <input
               class="sky-form-control"
               max="1"
               min="0"
@@ -214,8 +214,8 @@
             type="button"
             [attr.aria-label]="('skyux_colorpicker_preset_color' | skyLibResources) + ' ' + color"
             [ngClass]="{
-              'sky-preset-color' : currentTheme.name === 'default',
-              'sky-btn sky-btn-link' : currentTheme.name === 'modern'
+              'sky-preset-color' : themeName === 'default',
+              'sky-btn sky-btn-link' : themeName === 'modern'
             }"
             [style.backgroundColor]="color"
             (click)="setColorFromString(color)"
@@ -226,7 +226,7 @@
       <div
         class="sky-colorpicker-footer"
         [ngClass]="{
-          'sky-padding-even-large' : currentTheme.name === 'default'
+          'sky-padding-even-large' : themeName === 'default'
         }"
       >
         <section
@@ -236,7 +236,7 @@
             class="sky-btn sky-btn-primary sky-btn-colorpicker-apply"
             type="button"
             [attr.aria-label]="'skyux_colorpicker_apply' | skyLibResources"
-            [ngClass]="{ 'sky-margin-inline-sm' : currentTheme.name === 'modern' }"
+            [ngClass]="{ 'sky-margin-inline-sm' : themeName === 'modern' }"
             (click)="applyColor()"
           >
             {{ 'skyux_colorpicker_apply' | skyLibResources }}
@@ -259,10 +259,24 @@
   >
   </span>
 
-  <button *ngIf="showResetButton"
+  <button *ngIf="showResetButton && themeName === 'default'"
     class="sky-colorpicker-reset-button"
     type="button"
     [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
     (click)="resetPickerColor()"
   ></button>
+
+  <button *ngIf="showResetButton && themeName === 'modern'"
+    class="sky-btn sky-btn-icon-borderless sky-margin-inline-sm"
+    type="button"
+    [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
+    (click)="resetPickerColor()"
+  >
+    <sky-icon
+      icon="trash"
+      iconType="skyux"
+      size="lg"
+    >
+    </sky-icon>
+  </button>
 </div>

@@ -21,6 +21,10 @@ import {
 } from '@skyux/i18n';
 
 import {
+  SkyIconModule
+} from '@skyux/indicators';
+
+import {
   SkyColorpickerResourcesModule
 } from '../shared/colorpicker-resources.module';
 
@@ -57,6 +61,7 @@ import {
     SkyColorpickerResourcesModule,
     SkyCoreAdapterModule,
     SkyI18nModule,
+    SkyIconModule,
     SkyInputBoxModule,
     SkyOverlayModule
   ],

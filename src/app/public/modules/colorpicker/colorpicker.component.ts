@@ -22,7 +22,6 @@ import {
 } from '@skyux/core';
 
 import {
-  SkyTheme,
   SkyThemeService
 } from '@skyux/theme';
 
@@ -152,6 +151,8 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   public isVisible: boolean = true;
 
+  public themeName: string;
+
   public triggerButtonId: string;
 
   @ViewChild('colorpickerTemplateRef', {
@@ -196,8 +197,6 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   private affixer: SkyAffixer;
-
-  private currentTheme: SkyTheme;
 
   private overlay: SkyOverlayInstance;
 
@@ -267,10 +266,11 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
           takeUntil(this.ngUnsubscribe)
         )
         .subscribe((themeSettings) => {
-          this.currentTheme = themeSettings.currentSettings.theme;
+          this.themeName = themeSettings.currentSettings?.theme?.name;
 
           // Hue/alpha slider bars have different widths in Modern theme.
-          if (this.currentTheme === SkyTheme.presets.modern) {
+          /* istanbul ignore if */
+          if (this.themeName === 'modern') {
             this.sliderDimMax = new SliderDimension(174, 270, 170, 174);
           } else {
             this.sliderDimMax = new SliderDimension(182, 270, 170, 182);
