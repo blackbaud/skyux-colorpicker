@@ -19,10 +19,21 @@
     [attr.aria-label]="'skyux_colorpicker_dropdown_button' | skyLibResources"
     [attr.id]="triggerButtonId"
     [attr.title]="'skyux_colorpicker_dropdown_button' | skyLibResources"
+    [ngClass]="{
+      'sky-margin-inline-sm': themeName === 'modern'
+    }"
     [style.background-color]="backgroundColorForDisplay"
     (click)="onTriggerButtonClick()"
     #triggerButtonRef
-  ></button>
+  >
+    <sky-icon *ngIf="showResetButton && themeName === 'modern'"
+      class="sky-colorpicker-button-modern-chevron"
+      icon="chevron-down"
+      iconType="skyux"
+      size="xs"
+    >
+    </sky-icon>
+  </button>
 
   <ng-template #colorpickerTemplateRef>
     <div
@@ -267,7 +278,7 @@
   ></button>
 
   <button *ngIf="showResetButton && themeName === 'modern'"
-    class="sky-btn sky-btn-icon-borderless sky-margin-inline-sm"
+    class="sky-btn sky-btn-icon-borderless sky-colorpicker-reset-button-modern"
     type="button"
     [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
     (click)="resetPickerColor()"
