@@ -49,15 +49,15 @@ describe('Colorpicker', () => {
     return name;
   }
 
-  function validateColorpicker(done: DoneFn): void {
+  async function validateColorpicker(done: DoneFn): Promise<void> {
     expect('#screenshot-colorpicker').toMatchBaselineScreenshot(done, {
       screenshotName: getScreenshotName('colorpicker')
     });
   }
 
-  function validateColorpickerOpened(done: DoneFn): void {
+  async function validateColorpickerOpened(done: DoneFn): Promise<void> {
     element(by.css('.sky-colorpicker-button')).click();
-    expect('#screenshot-colorpicker-opened').toMatchBaselineScreenshot(done, {
+    expect('.sky-colorpicker-container').toMatchBaselineScreenshot(done, {
       screenshotName: getScreenshotName('colorpicker-opened')
     });
   }
