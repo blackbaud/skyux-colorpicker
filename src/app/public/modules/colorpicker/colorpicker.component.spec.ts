@@ -256,16 +256,16 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       tick();
       expect(component.colorpickerComponent.initialColor).toBe('#00f');
-      // expect(component.colorpickerComponent.lastAppliedColor).toEqual({
-      //   cmykText: 'cmyk(100%,100%,0%,0%)',
-      //   hslaText: 'hsla(240,100%,50%,1)',
-      //   rgbaText: 'rgba(0,0,255,1)',
-      //   hsva: { hue: 240, saturation: 100, value: 100, alpha: 1 },
-      //   rgba: { red: 0, green: 0, blue: 255, alpha: 1 },
-      //   hsla: { hue: 240, saturation: 100, lightness: 50, alpha: 1 },
-      //   cmyk: { cyan: 100, magenta: 100, yellow: 0, key: 0 },
-      //   hex: '#00f'
-      // });
+      expect(component.colorpickerComponent.lastAppliedColor as any).toEqual({
+        cmykText: 'cmyk(100%,100%,0%,0%)',
+        hslaText: 'hsla(240,100%,50%,1)',
+        rgbaText: 'rgba(0,0,255,1)',
+        hsva: { hue: 240, saturation: 100, value: 100, alpha: 1 },
+        rgba: { red: 0, green: 0, blue: 255, alpha: 1 },
+        hsla: { hue: 240, saturation: 100, lightness: 50, alpha: 1 },
+        cmyk: { cyan: 100, magenta: 100, yellow: 0, key: 0 },
+        hex: '#00f'
+      });
     }));
 
     it('should populate correct information if model is given but an initial color is also given', fakeAsync(() => {
@@ -273,16 +273,16 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       tick();
       expect(component.colorpickerComponent.initialColor).toBe('#2889e5');
-      // expect(component.colorpickerComponent.lastAppliedColor).toEqual({
-      //   cmykText: 'cmyk(100%,100%,0%,0%)',
-      //   hslaText: 'hsla(240,100%,50%,1)',
-      //   rgbaText: 'rgba(0,0,255,1)',
-      //   hsva: { hue: 240, saturation: 100, value: 100, alpha: 1 },
-      //   rgba: { red: 0, green: 0, blue: 255, alpha: 1 },
-      //   hsla: { hue: 240, saturation: 100, lightness: 50, alpha: 1 },
-      //   cmyk: { cyan: 100, magenta: 100, yellow: 0, key: 0 },
-      //   hex: '#00f'
-      // });
+      expect(component.colorpickerComponent.lastAppliedColor as any).toEqual({
+        cmykText: 'cmyk(100%,100%,0%,0%)',
+        hslaText: 'hsla(240,100%,50%,1)',
+        rgbaText: 'rgba(0,0,255,1)',
+        hsva: { hue: 240, saturation: 100, value: 100, alpha: 1 },
+        rgba: { red: 0, green: 0, blue: 255, alpha: 1 },
+        hsla: { hue: 240, saturation: 100, lightness: 50, alpha: 1 },
+        cmyk: { cyan: 100, magenta: 100, yellow: 0, key: 0 },
+        hex: '#00f'
+      });
     }));
 
     it('should add aria-label to input if not specified', fakeAsync(() => {
