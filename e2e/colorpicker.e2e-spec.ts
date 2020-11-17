@@ -8,7 +8,10 @@ import {
   SkyHostBrowser,
   SkyVisualThemeSelector
 } from '@skyux-sdk/e2e';
-import { SkyHostBrowserBreakpoint } from '@skyux-sdk/e2e/host-browser/host-browser-breakpoint';
+
+import {
+  SkyHostBrowserBreakpoint
+} from '@skyux-sdk/e2e/host-browser/host-browser-breakpoint';
 
 describe('Colorpicker', () => {
 
