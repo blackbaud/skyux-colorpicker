@@ -363,7 +363,7 @@
 
     sky-input-box:first-child {
       width: 100%;
-      flex: initial;
+      flex: 0 1 auto;
       margin: 0 0 10px 0;
     }
 
@@ -378,20 +378,21 @@
   }
 
   .sky-colorpicker-preset-color-area {
-    padding: 10px 10px 20px 10px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
-    row-gap: 15px;
-    column-gap: 15px;
+    padding: 10px 10px 15px 10px;
 
     .sky-btn {
       height: 46px;
       width: 46px;
       border-radius: 4px;
+      margin: 0 15px 15px 0;
 
       &:not(:active), &:not(:hover), &:not(:focus) {
         border: 1px solid #d2d2d2;
       }
+    }
+
+    .sky-btn:nth-child(5n) {
+      margin: 0 0 15px 0;
     }
   }
 
