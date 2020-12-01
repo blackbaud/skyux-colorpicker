@@ -1,6 +1,5 @@
 @import "~@skyux/theme/scss/mixins";
 @import "~@skyux/theme/scss/_compat/mixins";
-@import "~@skyux/theme/scss/variables";
 
 .sky-colorpicker-container {
   position: fixed;
@@ -23,12 +22,6 @@
   width: 0px;
   height: 0px;
   overflow: hidden;
-}
-
-.sky-colorpicker-reset-button::before {
-  content: '\f00d';
-  font-family: FontAwesome;
-  font-size: $sky-font-size-base;
 }
 
 .sky-colorpicker-reset-button {
