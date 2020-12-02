@@ -1,6 +1,6 @@
 # 4.2.1 (2020-12-02)
 
-- Fixed the colorpicker component button to show proper hover and focus styles. [#77](https://github.com/blackbaud/skyux-colorpicker/pull/77)
+- Fixed the hover and focus styles for the colorpicker button. [#77](https://github.com/blackbaud/skyux-colorpicker/pull/77)
 - Fixed the colorpicker component to properly position the picker below the trigger button. [#79](https://github.com/blackbaud/skyux-colorpicker/pull/79)
 
 # 4.2.0 (2020-11-19)
@@ -106,4 +106,3 @@
 # 3.0.0-alpha.0 (2018-10-08)
 
 - Initial alpha release.
-
