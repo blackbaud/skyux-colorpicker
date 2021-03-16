@@ -227,8 +227,8 @@
             type="button"
             [attr.aria-label]="('skyux_colorpicker_preset_color' | skyLibResources) + ' ' + color"
             [skyThemeClass]="{
-              'sky-preset-color' : 'default',
-              'sky-btn sky-btn-link' : 'modern'
+              'sky-preset-color': 'default',
+              'sky-btn sky-btn-link': 'modern'
             }"
             [style.backgroundColor]="color"
             (click)="setColorFromString(color)"
@@ -238,8 +238,8 @@
 
       <div
         class="sky-colorpicker-footer"
-        [ngClass]="{
-          'sky-padding-even-large' : themeName === 'default'
+        [skyThemeClass]="{
+          'sky-padding-even-large': 'default'
         }"
       >
         <section
@@ -272,20 +272,22 @@
   >
   </span>
 
-  <button *ngIf="showResetButton && themeName === 'default'"
-    class="sky-colorpicker-reset-button"
-    type="button"
-    [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
-    (click)="resetPickerColor()"
-  >
-    <sky-icon
-      icon="times"
-      size="sm"
+  <ng-template [skyThemeIf]="'default'">
+    <button *ngIf="showResetButton"
+      class="sky-colorpicker-reset-button"
+      type="button"
+      [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
+      (click)="resetPickerColor()"
     >
-    </sky-icon>
-  </button>
+      <sky-icon
+        icon="times"
+        size="sm"
+      >
+      </sky-icon>
+    </button>
+  </ng-template>
 
-  <ng-container *skyThemeIf="'modern'">
+  <ng-template [skyThemeIf]="'modern'">
     <button *ngIf="showResetButton"
       class="sky-btn sky-btn-icon-borderless sky-colorpicker-reset-button-modern"
       type="button"
@@ -299,5 +301,5 @@
       >
       </sky-icon>
     </button>
-  </ng-container>
+  </ng-template>
 </div>
