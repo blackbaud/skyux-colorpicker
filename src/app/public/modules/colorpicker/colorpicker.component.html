@@ -272,34 +272,25 @@
   >
   </span>
 
-  <ng-template [skyThemeIf]="'default'">
-    <button *ngIf="showResetButton"
-      class="sky-colorpicker-reset-button"
-      type="button"
-      [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
-      (click)="resetPickerColor()"
+  <button *ngIf="showResetButton"
+    [skyThemeClass]="{
+      'sky-colorpicker-reset-button': 'default',
+      'sky-btn sky-btn-icon-borderless sky-colorpicker-reset-button-modern': 'modern'
+    }"
+    type="button"
+    [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
+    (click)="resetPickerColor()"
+  >
+    <sky-icon *skyThemeIf="'default'"
+      icon="times"
+      size="sm"
     >
-      <sky-icon
-        icon="times"
-        size="sm"
-      >
-      </sky-icon>
-    </button>
-  </ng-template>
-
-  <ng-template [skyThemeIf]="'modern'">
-    <button *ngIf="showResetButton"
-      class="sky-btn sky-btn-icon-borderless sky-colorpicker-reset-button-modern"
-      type="button"
-      [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
-      (click)="resetPickerColor()"
+    </sky-icon>
+    <sky-icon *skyThemeIf="'modern'"
+      icon="trash"
+      iconType="skyux"
+      size="lg"
     >
-      <sky-icon
-        icon="trash"
-        iconType="skyux"
-        size="lg"
-      >
-      </sky-icon>
-    </button>
-  </ng-template>
+    </sky-icon>
+  </button>
 </div>
