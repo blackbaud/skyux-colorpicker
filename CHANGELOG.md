@@ -1,4 +1,4 @@
-# 4.2.4 (2021-03-18)
+# 4.2.4 (2021-04-22)
 
 - Fixed the label for the button that closes the colorpicker. [#86]https://github.com/blackbaud/skyux-colorpicker/pull/86)
 
