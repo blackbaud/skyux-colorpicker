@@ -286,6 +286,7 @@ export class SkyColorpickerInputDirective
     }
 
     this.skyColorpickerInput.updatePickerValues(output);
+    this.skyColorpickerInput.backgroundColorForDisplay = output;
 
     this.renderer.setStyle(element, 'background-color', setElementValue);
     this.renderer.setProperty(element, 'value', output);
