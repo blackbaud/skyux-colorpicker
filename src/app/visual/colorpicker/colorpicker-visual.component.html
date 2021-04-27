@@ -9,15 +9,14 @@
     #colorPickerExample1
   >
     <input
+      [initialColor]="selectedColor1"
       [outputFormat]="selectedOutputFormat1"
       [presetColors]="presetColors1"
       [skyColorpickerInput]="colorPickerExample1"
-      [(ngModel)]="selectedColor1"
+      [(ngModel)]="color1"
     >
   </sky-colorpicker>
 </div>
-
-<p>{{ color1?.value }}</p>
 
 <div
   id="screenshot-colorpicker2"
