@@ -155,6 +155,7 @@ export class SkyColorpickerInputDirective
   public changeInput(event: any) {
     const value = event.target.value;
     this.skyColorpickerInput.updatePickerValues(value);
+    this.skyColorpickerInput.backgroundColorForDisplay = value;
   }
 
   @HostListener('change', ['$event'])
@@ -190,6 +191,7 @@ export class SkyColorpickerInputDirective
       });
 
     this.skyColorpickerInput.updatePickerValues(this.initialColor);
+    this.skyColorpickerInput.backgroundColorForDisplay = this.initialColor;
 
     /// Set aria-label as default, if not set
     if (!element.getAttribute('aria-label')) {
