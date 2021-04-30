@@ -1,6 +1,6 @@
 import {
-  element,
-  by
+  by,
+  element
 } from 'protractor';
 
 import {
