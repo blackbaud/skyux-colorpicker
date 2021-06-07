@@ -91,6 +91,9 @@ let componentIdIndex = 0;
   selector: 'sky-colorpicker',
   templateUrl: './colorpicker.component.html',
   styleUrls: ['./colorpicker.component.scss'],
+  providers: [
+    SkyColorpickerService
+  ],
   encapsulation: ViewEncapsulation.None
 })
 export class SkyColorpickerComponent implements OnInit, OnDestroy {
