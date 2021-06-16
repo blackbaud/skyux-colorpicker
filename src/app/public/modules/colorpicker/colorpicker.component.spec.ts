@@ -332,6 +332,16 @@ describe('Colorpicker Component', () => {
         .getAttribute('aria-labelledby')).toBe(customLabelledBy);
     }));
 
+    it('should not set label and title attributes if labelledby is provided by consumer', fakeAsync(() => {
+      component.labelledBy = 'myId';
+
+      fixture.detectChanges();
+      tick();
+
+      expect(getColorpickerButton(nativeElement).getAttribute('aria-label')).toBeNull();
+      expect(getColorpickerButton(nativeElement).getAttribute('title')).toBeNull();
+    }));
+
     it('should output RGBA', fakeAsync(() => {
       component.selectedOutputFormat = 'rgba';
       openColorpicker(nativeElement, fixture);
