@@ -41,10 +41,6 @@ import {
 } from './colorpicker-input.directive';
 
 import {
-  SkyColorpickerService
-} from './colorpicker.service';
-
-import {
   SkyColorpickerSliderDirective
 } from './colorpicker-slider.directive';
 
@@ -73,9 +69,6 @@ import {
   exports: [
     SkyColorpickerComponent,
     SkyColorpickerInputDirective
-  ],
-  providers: [
-    SkyColorpickerService
   ],
   entryComponents: [
     SkyColorpickerComponent
