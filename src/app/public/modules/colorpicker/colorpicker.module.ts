@@ -8,7 +8,6 @@ import {
 
 import {
   SkyAffixModule,
-  SkyCoreAdapterModule,
   SkyOverlayModule
 } from '@skyux/core';
 
@@ -59,7 +58,6 @@ import {
     CommonModule,
     SkyAffixModule,
     SkyColorpickerResourcesModule,
-    SkyCoreAdapterModule,
     SkyI18nModule,
     SkyIconModule,
     SkyInputBoxModule,
