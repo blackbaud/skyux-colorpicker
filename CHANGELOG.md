@@ -1,3 +1,9 @@
+# 5.0.0-beta.0 (2021-07-08)
+
+- Initial beta release.
+- Added support for `@angular/core@^12`. [#93](https://github.com/blackbaud/skyux-colorpicker/pull/93)
+- Added support for `5.0.0-beta.*` versions of SKY UX component libraries. [#93](https://github.com/blackbaud/skyux-colorpicker/pull/93)
+
 # 4.3.0 (2021-06-16)
 
 - Added the `label` and `labelledBy` inputs to the colorpicker component. [#91](https://github.com/blackbaud/skyux-colorpicker/pull/91)

@@ -12,10 +12,17 @@ import {
 } from '@skyux/router';
 
 import {
+  SkyColorpickerForRootCompatModule
+} from './public/modules/shared/colorpicker-for-root-compat.module';
+
+import {
   SkyColorpickerModule
 } from './public/public_api';
 
 @NgModule({
+  imports: [
+    SkyColorpickerForRootCompatModule
+  ],
   exports: [
     SkyAppLinkModule,
     SkyColorpickerModule,
