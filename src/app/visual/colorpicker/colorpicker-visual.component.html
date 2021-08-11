@@ -6,9 +6,9 @@
   class="sky-btn sky-btn-default"
   id="screenshot-action-button-center-align"
   type="button"
-  (click)="onToggleAbleTextEditor()"
+  (click)="onToggleAbleColorpicker()"
 >
-  Toggle Able/Disable Text Editor
+  Toggle Colorpicker #1's Ability
 </button>
 
 <form [formGroup]="myForm">
@@ -20,15 +20,14 @@
       #colorPickerExample1
     >
       <input
+        formControlName="colorpicker"
         [initialColor]="selectedColor1"
         [outputFormat]="selectedOutputFormat1"
         [presetColors]="presetColors1"
         [skyColorpickerInput]="colorPickerExample1"
         [(ngModel)]="color1"
-        [disabled]="disabled"
       >
     </sky-colorpicker>
-    {{disabled}}
   </div>
 </form>
 <div

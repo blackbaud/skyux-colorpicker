@@ -64,7 +64,7 @@ export class ColorpickerVisualComponent implements OnInit {
 
   public ngOnInit(): void {
     this.myForm = this.formBuilder.group({
-      textEditor: new FormControl('')
+      colorpicker: new FormControl('')
     });
   }
 
@@ -72,11 +72,11 @@ export class ColorpickerVisualComponent implements OnInit {
     this.themeSvc.setTheme(themeSettings);
   }
 
-  public onToggleAbleTextEditor(): void {
-    if (this.myForm.controls['textEditor'].disabled) {
-      this.myForm.controls['textEditor'].enable();
+  public onToggleAbleColorpicker(): void {
+    if (this.myForm.controls['colorpicker'].disabled) {
+      this.myForm.controls['colorpicker'].enable();
     } else {
-      this.myForm.controls['textEditor'].disable();
+      this.myForm.controls['colorpicker'].disable();
     }
   }
 
