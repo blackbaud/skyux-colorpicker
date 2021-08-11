@@ -20,6 +20,7 @@
     [attr.aria-labelledby]="labelledBy"
     [attr.id]="triggerButtonId"
     [attr.title]="label || (labelledBy ? null : ('skyux_colorpicker_dropdown_button' | skyLibResources))"
+    [disabled]="disabled"
     [skyThemeClass]="{
       'sky-margin-inline-sm': 'modern'
     }"
