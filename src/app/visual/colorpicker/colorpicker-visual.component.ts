@@ -1,6 +1,13 @@
 import {
-  Component
+  Component,
+  OnInit
 } from '@angular/core';
+
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup
+} from '@angular/forms';
 
 import {
   SkyThemeService,
@@ -11,7 +18,7 @@ import {
   selector: 'colorpicker-visual',
   templateUrl: './colorpicker-visual.component.html'
 })
-export class ColorpickerVisualComponent {
+export class ColorpickerVisualComponent implements OnInit {
   public color1: any;
   public selectedColor1: string = '#2889e5';
   public selectedOutputFormat1: string = 'rgba';
@@ -48,12 +55,29 @@ export class ColorpickerVisualComponent {
     '#68AFEF'
   ];
 
+  public myForm: FormGroup;
+
   constructor(
+    private formBuilder: FormBuilder,
     private themeSvc: SkyThemeService
-  ) { }
+  ) {}
+
+  public ngOnInit(): void {
+    this.myForm = this.formBuilder.group({
+      textEditor: new FormControl('')
+    });
+  }
 
   public themeSettingsChange(themeSettings: SkyThemeSettings): void {
     this.themeSvc.setTheme(themeSettings);
+  }
+
+  public onToggleAbleTextEditor(): void {
+    if (this.myForm.controls['textEditor'].disabled) {
+      this.myForm.controls['textEditor'].enable();
+    } else {
+      this.myForm.controls['textEditor'].disable();
+    }
   }
 
 }

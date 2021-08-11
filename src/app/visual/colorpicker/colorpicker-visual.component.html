@@ -2,23 +2,35 @@
   (themeSettingsChange)="themeSettingsChange($event)"
 ></sky-docs-demo-control-panel-theme>
 
-<div
-  id="screenshot-colorpicker"
+<button
+  class="sky-btn sky-btn-default"
+  id="screenshot-action-button-center-align"
+  type="button"
+  (click)="onToggleAbleTextEditor()"
 >
-  <sky-colorpicker
-    labelledBy="FOOBAR"
-    #colorPickerExample1
-  >
-    <input
-      [initialColor]="selectedColor1"
-      [outputFormat]="selectedOutputFormat1"
-      [presetColors]="presetColors1"
-      [skyColorpickerInput]="colorPickerExample1"
-      [(ngModel)]="color1"
-    >
-  </sky-colorpicker>
-</div>
+  Toggle Able/Disable Text Editor
+</button>
 
+<form [formGroup]="myForm">
+  <div
+    id="screenshot-colorpicker"
+  >
+    <sky-colorpicker
+      labelledBy="FOOBAR"
+      #colorPickerExample1
+    >
+      <input
+        [initialColor]="selectedColor1"
+        [outputFormat]="selectedOutputFormat1"
+        [presetColors]="presetColors1"
+        [skyColorpickerInput]="colorPickerExample1"
+        [(ngModel)]="color1"
+        [disabled]="disabled"
+      >
+    </sky-colorpicker>
+    {{disabled}}
+  </div>
+</form>
 <div
   id="screenshot-colorpicker2"
   style="height:520px;padding:10px;"
