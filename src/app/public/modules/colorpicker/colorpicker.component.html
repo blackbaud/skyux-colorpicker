@@ -22,6 +22,9 @@
     [attr.id]="triggerButtonId"
     [attr.title]="label || (labelledBy ? null : ('skyux_colorpicker_dropdown_button' | skyLibResources))"
     [disabled]="disabled"
+    [ngClass]="{
+      'isDisabled': disabled
+    }"
     [skyThemeClass]="{
       'sky-margin-inline-sm': 'modern'
     }"
@@ -279,6 +282,10 @@
     [skyThemeClass]="{
       'sky-colorpicker-reset-button': 'default',
       'sky-btn sky-btn-icon-borderless sky-colorpicker-reset-button-modern': 'modern'
+    }"
+    [disabled]="disabled"
+    [ngClass]="{
+      'isDisabled': disabled
     }"
     type="button"
     [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
