@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.isDisabled {
+  opacity: .65;
+}
+
 // This ensures the nomalize CSS won't replace the active state of a button's background.
 .sky-colorpicker-button,
 .sky-colorpicker-button:active {

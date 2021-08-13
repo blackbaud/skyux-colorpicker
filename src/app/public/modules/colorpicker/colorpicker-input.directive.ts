@@ -144,6 +144,11 @@ export class SkyColorpickerInputDirective
   public set disabled(value: boolean) {
     this._disabled = value;
     this.skyColorpickerInput.disabled = value;
+    if (this.disabled) {
+      this.skyColorpickerInput.backgroundColorForDisplay = '#fff';
+    } else {
+      this.skyColorpickerInput.backgroundColorForDisplay = this.modelValue.hex;
+    }
   }
 
   public get disabled(): boolean {
