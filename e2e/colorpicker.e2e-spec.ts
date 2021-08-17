@@ -62,6 +62,12 @@ describe('Colorpicker', () => {
     });
   }
 
+  async function validateColorpickerDisabled(done: DoneFn): Promise<void> {
+    expect('#screenshot-colorpicker3').toMatchBaselineScreenshot(done, {
+      screenshotName: getScreenshotName('colorpicker-disabled')
+    });
+  }
+
   function runTests(): void {
     it('should match previous colorpicker screenshot', (done) => {
       validateColorpicker(done);
@@ -69,6 +75,10 @@ describe('Colorpicker', () => {
 
     it('should match previous opened screenshot', (done) => {
       validateColorpickerOpened(done);
+    });
+
+    it('should match previous disabled screenshot', (done) => {
+      validateColorpickerDisabled(done);
     });
   }
   //#endregion
