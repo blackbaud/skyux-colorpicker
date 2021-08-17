@@ -207,7 +207,10 @@ export class SkyColorpickerInputDirective
       });
 
     this.skyColorpickerInput.updatePickerValues(this.initialColor);
-    this.skyColorpickerInput.backgroundColorForDisplay = this.initialColor;
+
+    if (!this.disabled) {
+      this.skyColorpickerInput.backgroundColorForDisplay = this.initialColor;
+    }
 
     /// Set aria-label as default, if not set
     if (!element.getAttribute('aria-label')) {
@@ -255,9 +258,6 @@ export class SkyColorpickerInputDirective
   public registerOnValidatorChange(fn: () => void): void { this._validatorChange = fn; }
 
   public writeValue(value: any) {
-    if (this.disabled) {
-      return;
-    }
     if (this.skyColorpickerInput && value && value !== this.skyColorpickerInput.lastAppliedColor) {
       this.modelValue = this.formatter(value);
       this.writeModelValue(this.modelValue);
