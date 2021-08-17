@@ -55,6 +55,24 @@ export class ColorpickerVisualComponent implements OnInit {
     '#68AFEF'
   ];
 
+  public color3: any;
+  public selectedColor3: string = '#2889e5';
+  public selectedOutputFormat3: string = 'rgba';
+  public presetColors3 = [
+    '#333333',
+    '#888888',
+    '#EFEFEF',
+    '#FFF',
+    '#BD4040',
+    '#617FC2',
+    '#60AC68',
+    '#3486BA',
+    '#E87134',
+    '#DA9C9C',
+    '#A1B1A7',
+    '#68AFEF'
+  ];
+
   public myForm: FormGroup;
 
   constructor(
@@ -79,5 +97,4 @@ export class ColorpickerVisualComponent implements OnInit {
       this.myForm.controls['colorpicker'].disable();
     }
   }
-
 }

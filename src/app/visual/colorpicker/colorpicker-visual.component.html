@@ -11,7 +11,9 @@
   Toggle Colorpicker #1's Ability
 </button>
 
-<form [formGroup]="myForm">
+<form
+  [formGroup]="myForm"
+>
   <div
     id="screenshot-colorpicker"
   >
@@ -44,6 +46,25 @@
       [presetColors]="presetColors2"
       [skyColorpickerInput]="colorPickerExample2"
       [(ngModel)]="color2"
+    >
+  </sky-colorpicker>
+</div>
+
+<div
+  id="screenshot-colorpicker3"
+  style="height:50px;padding:10px;"
+>
+  <sky-colorpicker
+    #colorPickerExample3
+  >
+    <input
+      [allowTransparency]="false"
+      [disabled]="true"
+      [initialColor]="selectedColor3"
+      [outputFormat]="selectedOutputFormat3"
+      [presetColors]="presetColors3"
+      [skyColorpickerInput]="colorPickerExample3"
+      [(ngModel)]="color3"
     >
   </sky-colorpicker>
 </div>
