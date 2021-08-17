@@ -1,4 +1,8 @@
 import {
+  DebugElement
+} from '@angular/core';
+
+import {
   async,
   fakeAsync,
   TestBed,
@@ -62,6 +66,7 @@ describe('Colorpicker Component', () => {
   let mockThemeSvc: {
     settingsChange: BehaviorSubject<SkyThemeSettingsChange>
   };
+  let debugElement: DebugElement;
 
   //#region helpers
   function getColorpickerContainer(): HTMLElement {
@@ -257,6 +262,7 @@ describe('Colorpicker Component', () => {
       nativeElement = fixture.nativeElement as HTMLElement;
       component = <ColorpickerTestComponent> fixture.componentInstance;
       colorpickerComponent = component.colorpickerComponent;
+      debugElement = fixture.debugElement;
     });
 
     it('should populate correct information if model is given', fakeAsync(() => {
@@ -455,7 +461,7 @@ describe('Colorpicker Component', () => {
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
     }));
 
-    it('should use the last applied color to revert to on cancel', fakeAsync(() => {
+    fit('should use the last applied color to revert to on cancel', fakeAsync(() => {
       component.selectedOutputFormat = 'hex';
       component.colorModel = '#2889e5';
       fixture.detectChanges();
@@ -463,12 +469,15 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       openColorpicker(nativeElement, fixture);
+      // setInputElementValue(nativeElement, 'hex', '#2889e5');
       setInputElementValue(nativeElement, 'hex', '#2B7230');
       applyColorpicker(nativeElement, fixture);
+      // verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
       closeColorpicker(nativeElement, fixture);
+      // verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
     }));
 
@@ -959,6 +968,32 @@ describe('Colorpicker Component', () => {
 
       expect(alphaInput).toBeFalsy();
     }));
+
+    it('should enable and disable AfterViewInit', async () => {
+
+      let outermostDiv = debugElement.query(By.css('form > div > sky-colorpicker > div')).nativeElement;
+      fixture.detectChanges();
+
+      expect(outermostDiv).not.toHaveCssClass('isDisabled');
+
+      fixture.detectChanges();
+
+      component.myForm.controls['colorpicker'].disable();
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(outermostDiv).toHaveCssClass('isDisabled');
+
+      fixture.detectChanges();
+
+      component.myForm.controls['colorpicker'].enable();
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(outermostDiv).not.toHaveCssClass('isDisabled');
+    });
 
   });
 

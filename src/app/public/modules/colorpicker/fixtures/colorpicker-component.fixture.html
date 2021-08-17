@@ -1,18 +1,23 @@
-<div>
-  <sky-colorpicker
-    [label]="label"
-    [labelledBy]="labelledBy"
-    [messageStream]="colorpickerController"
-    #colorPickerTest
-  >
-    <input
-      [type]="inputType"
-      [skyColorpickerInput]="colorPickerTest"
-      [(ngModel)]="colorModel"
-      [presetColors]="presetColors"
-      [initialColor]="selectedColor"
-      [outputFormat]="selectedOutputFormat"
-      [alphaChannel]="selectedHexType"
-      [allowTransparency]="selectedTransparency">
-  </sky-colorpicker>
-</div>
+<form
+  [formGroup]="myForm"
+>
+  <div>
+    <sky-colorpicker
+      [label]="label"
+      [labelledBy]="labelledBy"
+      [messageStream]="colorpickerController"
+      #colorPickerTest
+    >
+      <input
+        formControlName="colorpicker"
+        [type]="inputType"
+        [skyColorpickerInput]="colorPickerTest"
+        [(ngModel)]="colorModel"
+        [presetColors]="presetColors"
+        [initialColor]="selectedColor"
+        [outputFormat]="selectedOutputFormat"
+        [alphaChannel]="selectedHexType"
+        [allowTransparency]="selectedTransparency">
+    </sky-colorpicker>
+  </div>
+</form>

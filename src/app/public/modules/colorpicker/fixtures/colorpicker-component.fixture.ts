@@ -1,7 +1,14 @@
 import {
   Component,
+  OnInit,
   ViewChild
 } from '@angular/core';
+
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup
+} from '@angular/forms';
 
 import {
   Subject
@@ -23,7 +30,8 @@ import {
   selector: 'sky-colorpicker-fixture',
   templateUrl: './colorpicker-component.fixture.html'
 })
-export class ColorpickerTestComponent {
+export class ColorpickerTestComponent implements OnInit {
+  public myForm: FormGroup;
   public label: string;
   public labelledBy: string;
   public selectedHexType = 'hex6';
@@ -53,6 +61,16 @@ export class ColorpickerTestComponent {
   public colorpickerController = new Subject<SkyColorpickerMessage>();
 
   public colorModel: string;
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {}
+
+  public ngOnInit(): void {
+    this.myForm = this.formBuilder.group({
+      colorpicker: new FormControl('')
+    });
+  }
 
   public sendMessage(type: SkyColorpickerMessageType) {
     this.colorpickerController.next({ type });
