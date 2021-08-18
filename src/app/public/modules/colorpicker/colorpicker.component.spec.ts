@@ -262,7 +262,6 @@ describe('Colorpicker Component', () => {
       nativeElement = fixture.nativeElement as HTMLElement;
       component = <ColorpickerTestComponent> fixture.componentInstance;
       colorpickerComponent = component.colorpickerComponent;
-      debugElement = fixture.debugElement;
     });
 
     it('should populate correct information if model is given', fakeAsync(() => {
@@ -461,7 +460,7 @@ describe('Colorpicker Component', () => {
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
     }));
 
-    fit('should use the last applied color to revert to on cancel', fakeAsync(() => {
+    it('should use the last applied color to revert to on cancel', fakeAsync(() => {
       component.selectedOutputFormat = 'hex';
       component.colorModel = '#2889e5';
       fixture.detectChanges();
@@ -968,33 +967,6 @@ describe('Colorpicker Component', () => {
 
       expect(alphaInput).toBeFalsy();
     }));
-
-    it('should enable and disable AfterViewInit', async () => {
-
-      let outermostDiv = debugElement.query(By.css('form > div > sky-colorpicker > div')).nativeElement;
-      fixture.detectChanges();
-
-      expect(outermostDiv).not.toHaveCssClass('isDisabled');
-
-      fixture.detectChanges();
-
-      component.myForm.controls['colorpicker'].disable();
-
-      await fixture.whenStable();
-      fixture.detectChanges();
-
-      expect(outermostDiv).toHaveCssClass('isDisabled');
-
-      fixture.detectChanges();
-
-      component.myForm.controls['colorpicker'].enable();
-
-      await fixture.whenStable();
-      fixture.detectChanges();
-
-      expect(outermostDiv).not.toHaveCssClass('isDisabled');
-    });
-
   });
 
   describe('reactive configuration', () => {
@@ -1006,6 +978,7 @@ describe('Colorpicker Component', () => {
       nativeElement = fixture.nativeElement as HTMLElement;
       component = fixture.componentInstance;
       colorpickerComponent = component.colorpickerComponent;
+      debugElement = fixture.debugElement;
     });
 
     it('should populate correct information if model is given', fakeAsync(() => {
@@ -1185,6 +1158,32 @@ describe('Colorpicker Component', () => {
       expect(overlaySpy).toHaveBeenCalledTimes(0);
 
     }));
+
+    it('should enable and disable AfterViewInit', async () => {
+
+      let outermostDiv = debugElement.query(By.css('form > sky-colorpicker > div')).nativeElement;
+      fixture.detectChanges();
+
+      expect(outermostDiv).not.toHaveCssClass('isDisabled');
+
+      fixture.detectChanges();
+
+      component.colorForm.controls['colorModel'].disable();
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(outermostDiv).toHaveCssClass('isDisabled');
+
+      fixture.detectChanges();
+
+      component.colorForm.controls['colorModel'].enable();
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(outermostDiv).not.toHaveCssClass('isDisabled');
+    });
 
   });
 
