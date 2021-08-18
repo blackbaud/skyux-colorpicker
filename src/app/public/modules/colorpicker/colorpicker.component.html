@@ -2,7 +2,7 @@
   class="sky-input-group"
   [ngClass]="{
     'sky-colorpicker-hidden': !isVisible,
-    'isDisabled': disabled
+    'disabled': disabled
   }"
 >
   <div
@@ -23,7 +23,7 @@
     [attr.title]="label || (labelledBy ? null : ('skyux_colorpicker_dropdown_button' | skyLibResources))"
     [disabled]="disabled"
     [ngClass]="{
-      'isDisabled': disabled
+      'disabled': disabled
     }"
     [skyThemeClass]="{
       'sky-margin-inline-sm': 'modern'
@@ -285,7 +285,7 @@
     }"
     [disabled]="disabled"
     [ngClass]="{
-      'isDisabled': disabled
+      'disabled': disabled
     }"
     type="button"
     [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"

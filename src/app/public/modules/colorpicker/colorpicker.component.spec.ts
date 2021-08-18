@@ -468,15 +468,12 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       openColorpicker(nativeElement, fixture);
-      // setInputElementValue(nativeElement, 'hex', '#2889e5');
       setInputElementValue(nativeElement, 'hex', '#2B7230');
       applyColorpicker(nativeElement, fixture);
-      // verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
       openColorpicker(nativeElement, fixture);
       setInputElementValue(nativeElement, 'hex', '#BFF666');
       closeColorpicker(nativeElement, fixture);
-      // verifyColorpicker(nativeElement, '#2889e5', '40, 137, 229');
       verifyColorpicker(nativeElement, '#2b7230', '43, 114, 48');
     }));
 
@@ -1164,7 +1161,7 @@ describe('Colorpicker Component', () => {
       let outermostDiv = debugElement.query(By.css('form > sky-colorpicker > div')).nativeElement;
       fixture.detectChanges();
 
-      expect(outermostDiv).not.toHaveCssClass('isDisabled');
+      expect(outermostDiv).not.toHaveCssClass('disabled');
 
       fixture.detectChanges();
 
@@ -1173,7 +1170,7 @@ describe('Colorpicker Component', () => {
       await fixture.whenStable();
       fixture.detectChanges();
 
-      expect(outermostDiv).toHaveCssClass('isDisabled');
+      expect(outermostDiv).toHaveCssClass('disabled');
 
       fixture.detectChanges();
 
@@ -1182,7 +1179,7 @@ describe('Colorpicker Component', () => {
       await fixture.whenStable();
       fixture.detectChanges();
 
-      expect(outermostDiv).not.toHaveCssClass('isDisabled');
+      expect(outermostDiv).not.toHaveCssClass('disabled');
     });
 
   });
