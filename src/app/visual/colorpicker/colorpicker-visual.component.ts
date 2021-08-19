@@ -74,6 +74,7 @@ export class ColorpickerVisualComponent implements OnInit {
   ];
 
   public myForm: FormGroup;
+  public disabled: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
