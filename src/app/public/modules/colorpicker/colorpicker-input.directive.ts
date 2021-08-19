@@ -140,20 +140,6 @@ export class SkyColorpickerInputDirective
   @Input()
   public allowTransparency = true;
 
-  @Input()
-  public set disabled(value: boolean) {
-    this._disabled = value;
-    this.skyColorpickerInput.disabled = value;
-    if (this.disabled) {
-      this.skyColorpickerInput.backgroundColorForDisplay = '#fff';
-    } else {
-      this.skyColorpickerInput.backgroundColorForDisplay = this.modelValue.hex;
-    }
-  }
-
-  public get disabled(): boolean {
-    return this._disabled;
-  }
 
   private _initialColor: string;
   private modelValue: SkyColorpickerOutput;
@@ -208,7 +194,7 @@ export class SkyColorpickerInputDirective
 
     this.skyColorpickerInput.updatePickerValues(this.initialColor);
 
-    if (!this.disabled) {
+    if (!this._disabled) {
       this.skyColorpickerInput.backgroundColorForDisplay = this.initialColor;
     }
 
@@ -286,7 +272,13 @@ export class SkyColorpickerInputDirective
    * Implemented as part of ControlValueAccessor.
    */
    public setDisabledState(isDisabled: boolean) {
-    this.disabled = isDisabled;
+    this._disabled = isDisabled;
+    this.skyColorpickerInput.disabled = isDisabled;
+    if (this._disabled) {
+      this.skyColorpickerInput.backgroundColorForDisplay = '#fff';
+    } else {
+      this.skyColorpickerInput.backgroundColorForDisplay = this.modelValue.hex;
+    }
   }
 
   private writeModelValue(model: SkyColorpickerOutput) {
