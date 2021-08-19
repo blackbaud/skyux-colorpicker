@@ -1,14 +1,14 @@
 <sky-docs-demo-control-panel-theme
   (themeSettingsChange)="themeSettingsChange($event)"
 ></sky-docs-demo-control-panel-theme>
-
+<br>
 <button
   class="sky-btn sky-btn-default"
   id="screenshot-action-button-center-align"
   type="button"
   (click)="onToggleAbleColorpicker()"
 >
-  Toggle Colorpicker #1's Ability
+  Toggle Colorpicker #1's Disable State
 </button>
 
 <form
@@ -17,8 +17,10 @@
   <div
     id="screenshot-colorpicker"
   >
+    <h3>
+      Colorpicker #1 (disable-able via a reactive form)
+    </h3>
     <sky-colorpicker
-      labelledBy="FOOBAR"
       #colorPickerExample1
     >
       <input
@@ -32,6 +34,9 @@
     </sky-colorpicker>
   </div>
 </form>
+<h3>
+  Colorpicker #2
+</h3>
 <div
   id="screenshot-colorpicker2"
   style="height:50px;padding:10px;"
@@ -50,6 +55,9 @@
   </sky-colorpicker>
 </div>
 
+<h3>
+  Colorpicker #3 (disabled via a template-driven form)
+</h3>
 <div
   id="screenshot-colorpicker3"
   style="height:50px;padding:10px;"
