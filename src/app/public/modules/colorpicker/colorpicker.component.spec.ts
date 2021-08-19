@@ -969,11 +969,8 @@ describe('Colorpicker Component', () => {
     it('should enable and disable AfterViewInit using a template-driven form', async () => {
 
       let outermostDiv = debugElement.query(By.css('div > sky-colorpicker > div')).nativeElement;
-      fixture.detectChanges();
 
-      expect(outermostDiv).not.toHaveCssClass('disabled');
-
-      fixture.detectChanges();
+      expect(outermostDiv).not.toHaveCssClass('sky-colorpicker-disabled');
 
       component.disabled = true;
 
@@ -981,9 +978,7 @@ describe('Colorpicker Component', () => {
       await fixture.whenStable();
       fixture.detectChanges();
 
-      expect(outermostDiv).toHaveCssClass('disabled');
-
-      fixture.detectChanges();
+      expect(outermostDiv).toHaveCssClass('sky-colorpicker-disabled');
 
       component.disabled = false;
 
@@ -991,7 +986,7 @@ describe('Colorpicker Component', () => {
       await fixture.whenStable();
       fixture.detectChanges();
 
-      expect(outermostDiv).not.toHaveCssClass('disabled');
+      expect(outermostDiv).not.toHaveCssClass('sky-colorpicker-disabled');
     });
   });
 
@@ -1188,27 +1183,22 @@ describe('Colorpicker Component', () => {
     it('should enable and disable AfterViewInit using a reactive form', async () => {
 
       let outermostDiv = debugElement.query(By.css('form > sky-colorpicker > div')).nativeElement;
-      fixture.detectChanges();
 
-      expect(outermostDiv).not.toHaveCssClass('disabled');
-
-      fixture.detectChanges();
+      expect(outermostDiv).not.toHaveCssClass('sky-colorpicker-disabled');
 
       component.colorForm.controls['colorModel'].disable();
 
       await fixture.whenStable();
       fixture.detectChanges();
 
-      expect(outermostDiv).toHaveCssClass('disabled');
-
-      fixture.detectChanges();
+      expect(outermostDiv).toHaveCssClass('sky-colorpicker-disabled');
 
       component.colorForm.controls['colorModel'].enable();
 
       await fixture.whenStable();
       fixture.detectChanges();
 
-      expect(outermostDiv).not.toHaveCssClass('disabled');
+      expect(outermostDiv).not.toHaveCssClass('sky-colorpicker-disabled');
     });
 
   });

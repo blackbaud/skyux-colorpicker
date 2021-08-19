@@ -2,7 +2,7 @@
   class="sky-input-group"
   [ngClass]="{
     'sky-colorpicker-hidden': !isVisible,
-    'disabled': disabled
+    'sky-colorpicker-disabled': disabled
   }"
 >
   <div
@@ -23,7 +23,7 @@
     [attr.title]="label || (labelledBy ? null : ('skyux_colorpicker_dropdown_button' | skyLibResources))"
     [disabled]="disabled"
     [ngClass]="{
-      'disabled': disabled
+      'sky-colorpicker-button-disabled': disabled
     }"
     [skyThemeClass]="{
       'sky-margin-inline-sm': 'modern'
@@ -38,6 +38,9 @@
         icon="chevron-down"
         iconType="skyux"
         size="xs"
+        [ngClass]="{
+          'sky-colorpicker-button-modern-chevron-disabled': disabled
+        }"
       >
       </sky-icon>
     </ng-container>
@@ -279,16 +282,16 @@
   </span>
 
   <button *ngIf="showResetButton"
+    type="button"
+    [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
+    [disabled]="disabled"
+    [ngClass]="{
+      'sky-colorpicker-reset-button-disabled': disabled
+    }"
     [skyThemeClass]="{
       'sky-colorpicker-reset-button': 'default',
       'sky-btn sky-btn-icon-borderless sky-colorpicker-reset-button-modern': 'modern'
     }"
-    [disabled]="disabled"
-    [ngClass]="{
-      'disabled': disabled
-    }"
-    type="button"
-    [attr.aria-label]="'skyux_colorpicker_reset' | skyLibResources"
     (click)="onResetClick()"
   >
     <sky-icon *skyThemeIf="'default'"
