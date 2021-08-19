@@ -140,7 +140,6 @@ export class SkyColorpickerInputDirective
   @Input()
   public allowTransparency = true;
 
-
   private _initialColor: string;
   private modelValue: SkyColorpickerOutput;
   private _disabled: boolean;
