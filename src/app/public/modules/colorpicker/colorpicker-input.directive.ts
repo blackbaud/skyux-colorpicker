@@ -140,9 +140,9 @@ export class SkyColorpickerInputDirective
   @Input()
   public allowTransparency = true;
 
+  private _disabled: boolean;
   private _initialColor: string;
   private modelValue: SkyColorpickerOutput;
-  private _disabled: boolean;
 
   constructor(
     private elementRef: ElementRef,
@@ -270,7 +270,7 @@ export class SkyColorpickerInputDirective
   /**
    * Implemented as part of ControlValueAccessor.
    */
-   public setDisabledState(isDisabled: boolean) {
+   public setDisabledState(isDisabled: boolean): void {
     this._disabled = isDisabled;
     this.skyColorpickerInput.disabled = isDisabled;
     if (this._disabled) {
