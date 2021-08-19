@@ -262,6 +262,7 @@ describe('Colorpicker Component', () => {
       nativeElement = fixture.nativeElement as HTMLElement;
       component = <ColorpickerTestComponent> fixture.componentInstance;
       colorpickerComponent = component.colorpickerComponent;
+      debugElement = fixture.debugElement;
     });
 
     it('should populate correct information if model is given', fakeAsync(() => {
@@ -964,6 +965,32 @@ describe('Colorpicker Component', () => {
 
       expect(alphaInput).toBeFalsy();
     }));
+
+    it('should enable and disable AfterViewInit using a template-driven form', async () => {
+
+      let outermostDiv = debugElement.query(By.css('div > sky-colorpicker > div')).nativeElement;
+      fixture.detectChanges();
+
+      expect(outermostDiv).not.toHaveCssClass('disabled');
+
+      fixture.detectChanges();
+
+      component.disabled = true;
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(outermostDiv).toHaveCssClass('disabled');
+
+      fixture.detectChanges();
+
+      component.disabled = false;
+
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(outermostDiv).not.toHaveCssClass('disabled');
+    });
   });
 
   describe('reactive configuration', () => {
@@ -1156,7 +1183,7 @@ describe('Colorpicker Component', () => {
 
     }));
 
-    it('should enable and disable AfterViewInit', async () => {
+    it('should enable and disable AfterViewInit using a reactive form', async () => {
 
       let outermostDiv = debugElement.query(By.css('form > sky-colorpicker > div')).nativeElement;
       fixture.detectChanges();
