@@ -977,6 +977,7 @@ describe('Colorpicker Component', () => {
 
       component.disabled = true;
 
+      fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();
 
@@ -986,6 +987,7 @@ describe('Colorpicker Component', () => {
 
       component.disabled = false;
 
+      fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();
 
