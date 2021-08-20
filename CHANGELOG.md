@@ -1,4 +1,4 @@
-# 4.3.1 (2021-08-20)
+# 4.4.0 (2021-08-20)
 
 - Added the ability to disable the colorpicker via reactive or template-driven forms. [#94](https://github.com/blackbaud/skyux-colorpicker/pull/94)
 
