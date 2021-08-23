@@ -280,12 +280,14 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
     this.addTriggerButtonEventListeners();
 
+    /* istanbul ignore else */
     if (this.themeSvc) {
       this.themeSvc.settingsChange
         .pipe(
           takeUntil(this.ngUnsubscribe)
         )
         .subscribe((themeSettings) => {
+          /* istanbul ignore next */
           const themeName = themeSettings.currentSettings?.theme?.name;
 
           // Hue/alpha slider bars have different widths in Modern theme.

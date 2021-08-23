@@ -93,6 +93,7 @@ export class SkyColorpickerInputDirective
    */
   @Input()
   public set initialColor(value: string) {
+    /* istanbul ignore else */
     if (!this._initialColor && !this.modelValue) {
       this.writeValue(value);
     }
@@ -183,6 +184,7 @@ export class SkyColorpickerInputDirective
 
     this.pickerChangedSubscription =
       this.skyColorpickerInput.selectedColorChanged.subscribe((newColor: SkyColorpickerOutput) => {
+        /* istanbul ignore else */
         if (newColor) {
           this.modelValue = this.formatter(newColor);
           this.writeModelValue(this.modelValue);
