@@ -1,3 +1,7 @@
+# 5.0.0-beta.1 (2021-08-24)
+
+- Migrated to Angular CLI. [#96](https://github.com/blackbaud/skyux-colorpicker/pull/96)
+
 # 5.0.0-beta.0 (2021-07-08)
 
 - Initial beta release.
