@@ -50,25 +50,25 @@ describe('Colorpicker', () => {
   }
 
   async function validateColorpicker(done: DoneFn): Promise<void> {
-    expect('#screenshot-colorpicker').toMatchBaselineScreenshot(done, {
+    await expect('#screenshot-colorpicker').toMatchBaselineScreenshot(done, {
       screenshotName: getScreenshotName('colorpicker')
     });
   }
 
   async function validateColorpickerOpened(done: DoneFn): Promise<void> {
-    element(by.css('.sky-colorpicker-button')).click();
-    expect('.sky-colorpicker-container').toMatchBaselineScreenshot(done, {
+    await element(by.css('.sky-colorpicker-button')).click();
+    await expect('.sky-colorpicker-container').toMatchBaselineScreenshot(done, {
       screenshotName: getScreenshotName('colorpicker-opened')
     });
   }
 
   function runTests(): void {
-    it('should match previous colorpicker screenshot', (done) => {
-      validateColorpicker(done);
+    it('should match previous colorpicker screenshot', async (done) => {
+      await validateColorpicker(done);
     });
 
-    it('should match previous opened screenshot', (done) => {
-      validateColorpickerOpened(done);
+    it('should match previous opened screenshot', async (done) => {
+      await validateColorpickerOpened(done);
     });
   }
   //#endregion
