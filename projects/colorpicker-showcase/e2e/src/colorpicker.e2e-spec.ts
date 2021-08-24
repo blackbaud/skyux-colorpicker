@@ -63,12 +63,12 @@ describe('Colorpicker', () => {
   }
 
   function runTests(): void {
-    it('should match previous colorpicker screenshot', (done) => {
-      validateColorpicker(done);
+    it('should match previous colorpicker screenshot', async (done) => {
+      await validateColorpicker(done);
     });
 
-    it('should match previous opened screenshot', (done) => {
-      validateColorpickerOpened(done);
+    it('should match previous opened screenshot', async (done) => {
+      await validateColorpickerOpened(done);
     });
   }
   //#endregion
