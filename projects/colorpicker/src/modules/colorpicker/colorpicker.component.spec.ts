@@ -1,10 +1,4 @@
-import {
-  async,
-  fakeAsync,
-  TestBed,
-  tick,
-  ComponentFixture
-} from '@angular/core/testing';
+import { fakeAsync, TestBed, tick, ComponentFixture, waitForAsync } from '@angular/core/testing';
 
 import {
   By
@@ -222,7 +216,7 @@ describe('Colorpicker Component', () => {
   }
   //#endregion
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     mockThemeSvc = {
       settingsChange: new BehaviorSubject<SkyThemeSettingsChange>(
         {
@@ -1117,7 +1111,7 @@ describe('Colorpicker Component', () => {
       fixture = TestBed.createComponent(ColorpickerTestComponent);
     });
 
-    it('should be accessible', async((done: DoneFn) => {
+    it('should be accessible', waitForAsync((done: DoneFn) => {
       fixture.detectChanges();
 
       fixture.whenStable().then(() => {
