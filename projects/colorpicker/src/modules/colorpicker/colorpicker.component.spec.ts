@@ -1125,8 +1125,9 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();
-      const colorpickerContainer = getColorpickerContainer();
       fixture.componentInstance.sendMessage(SkyColorpickerMessageType.Open);
+      fixture.detectChanges();
+      const colorpickerContainer = getColorpickerContainer();
 
       await expectAsync(colorpickerContainer).toBeAccessible(axeConfig);
     });
