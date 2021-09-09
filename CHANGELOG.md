@@ -1,3 +1,8 @@
+# 5.0.0-beta.2 (2021-09-09)
+
+- Fixed peer dependencies to include `@skyux/forms` and `@skyux/indicators`. [#100](https://github.com/blackbaud/skyux-colorpicker/pull/100)
+- Enabled the `partial` Ivy compilation mode. [#100](https://github.com/blackbaud/skyux-colorpicker/pull/100)
+
 # 5.0.0-beta.1 (2021-08-24)
 
 - Migrated to Angular CLI. [#96](https://github.com/blackbaud/skyux-colorpicker/pull/96)
