@@ -16,10 +16,6 @@ import {
 } from '@skyux/forms';
 
 import {
-  SkyColorpickerForRootCompatModule
-} from '../../shared/colorpicker-for-root-compat.module';
-
-import {
   SkyColorpickerModule
 } from '../colorpicker.module';
 
@@ -40,7 +36,6 @@ import {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SkyColorpickerForRootCompatModule,
     SkyColorpickerModule,
     SkyInputBoxModule
   ]
