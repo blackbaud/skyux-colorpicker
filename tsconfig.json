@@ -4,6 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "@skyux/colorpicker": [
+        "projects/colorpicker/src/public-api.ts"
+      ],
       "colorpicker": [
         "dist/colorpicker/colorpicker",
         "dist/colorpicker"

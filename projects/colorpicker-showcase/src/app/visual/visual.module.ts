@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { SkyDocsToolsModule } from '@skyux/docs-tools';
+import { RouterModule } from '@angular/router';
+import { SkyE2eThemeSelectorModule } from '@skyux/e2e-client';
 
 import { SkyColorpickerModule } from 'projects/colorpicker/src/public-api';
 
 import { ColorpickerVisualComponent } from './colorpicker/colorpicker-visual.component';
+import { VisualComponent } from './visual.component';
 
 @NgModule({
   declarations: [
-    ColorpickerVisualComponent
+    ColorpickerVisualComponent,
+    VisualComponent
   ],
   imports: [
     SkyColorpickerModule,
-    SkyDocsToolsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule,
+    SkyE2eThemeSelectorModule
   ]
 })
 export class VisualModule { }

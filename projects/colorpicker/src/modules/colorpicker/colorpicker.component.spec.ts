@@ -1,10 +1,4 @@
-import {
-  async,
-  fakeAsync,
-  TestBed,
-  tick,
-  ComponentFixture
-} from '@angular/core/testing';
+import { fakeAsync, TestBed, tick, ComponentFixture, waitForAsync } from '@angular/core/testing';
 
 import {
   By
@@ -12,6 +6,7 @@ import {
 
 import {
   expect,
+  expectAsync,
   SkyAppTestUtility
 } from '@skyux-sdk/testing';
 
@@ -222,7 +217,7 @@ describe('Colorpicker Component', () => {
   }
   //#endregion
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     mockThemeSvc = {
       settingsChange: new BehaviorSubject<SkyThemeSettingsChange>(
         {
@@ -1117,23 +1112,25 @@ describe('Colorpicker Component', () => {
       fixture = TestBed.createComponent(ColorpickerTestComponent);
     });
 
-    it('should be accessible', async((done: DoneFn) => {
+    it('should be accessible when closed', async () => {
       fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      const colorpicker = document.querySelector('sky-colorpicker');
 
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        expect(document.querySelector('sky-colorpicker')).toBeAccessible(() => {
-          fixture.componentInstance.sendMessage(SkyColorpickerMessageType.Open);
-          fixture.detectChanges();
+      await expectAsync(colorpicker).toBeAccessible(axeConfig);
+    });
 
-          fixture.whenStable().then(() => {
-            fixture.detectChanges();
-            expect(getColorpickerContainer()).toBeAccessible(done, axeConfig);
-          });
-        }, axeConfig);
+    it('should be accessible when open', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      fixture.componentInstance.sendMessage(SkyColorpickerMessageType.Open);
+      fixture.detectChanges();
+      const colorpickerContainer = getColorpickerContainer();
 
-      });
-    }));
+      await expectAsync(colorpickerContainer).toBeAccessible(axeConfig);
+    });
   });
 
 });

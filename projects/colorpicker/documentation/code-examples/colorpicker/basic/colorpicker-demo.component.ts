@@ -11,7 +11,7 @@ import {
 
 import {
   SkyColorpickerOutput
-} from '@skyux/colorpicker';
+} from 'projects/colorpicker/src/public-api';
 
 @Component({
   selector: 'app-colorpicker-demo',

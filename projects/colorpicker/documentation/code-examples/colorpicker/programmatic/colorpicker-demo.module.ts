@@ -12,7 +12,7 @@ import {
 
 import {
   SkyColorpickerModule
-} from '@skyux/colorpicker';
+} from 'projects/colorpicker/src/public-api';
 
 import {
   ColorpickerDemoComponent
