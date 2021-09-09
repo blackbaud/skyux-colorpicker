@@ -6,6 +6,7 @@ import {
 
 import {
   expect,
+  expectAsync,
   SkyAppTestUtility
 } from '@skyux-sdk/testing';
 
@@ -1111,23 +1112,24 @@ describe('Colorpicker Component', () => {
       fixture = TestBed.createComponent(ColorpickerTestComponent);
     });
 
-    it('should be accessible', waitForAsync((done: DoneFn) => {
+    it('should be accessible when closed', async () => {
       fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      const colorpicker = document.querySelector('sky-colorpicker');
 
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        expect(document.querySelector('sky-colorpicker')).toBeAccessible(() => {
-          fixture.componentInstance.sendMessage(SkyColorpickerMessageType.Open);
-          fixture.detectChanges();
+      await expectAsync(colorpicker).toBeAccessible(axeConfig);
+    });
 
-          fixture.whenStable().then(() => {
-            fixture.detectChanges();
-            expect(getColorpickerContainer()).toBeAccessible(done, axeConfig);
-          });
-        }, axeConfig);
+    it('should be accessible when open', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      const colorpickerContainer = getColorpickerContainer();
+      fixture.componentInstance.sendMessage(SkyColorpickerMessageType.Open);
 
-      });
-    }));
+      await expectAsync(colorpickerContainer).toBeAccessible(axeConfig);
+    });
   });
 
 });
