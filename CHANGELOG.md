@@ -1,3 +1,7 @@
+# 5.0.0-beta.3 (2021-09-14)
+
+- Updated peer dependencies. [#102](https://github.com/blackbaud/skyux-colorpicker/pull/102)
+
 # 5.0.0-beta.2 (2021-09-09)
 
 - Fixed peer dependencies to include `@skyux/forms` and `@skyux/indicators`. [#100](https://github.com/blackbaud/skyux-colorpicker/pull/100)
