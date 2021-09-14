@@ -1,6 +1,6 @@
 # 5.0.0-beta.3 (2021-09-14)
 
-- Updated peer dependencies. []()
+- Updated peer dependencies. [#102](https://github.com/blackbaud/skyux-colorpicker/pull/102)
 
 # 5.0.0-beta.2 (2021-09-09)
 
