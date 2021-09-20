@@ -29,7 +29,15 @@
           "options": {
             "main": "projects/colorpicker/src/test.ts",
             "tsConfig": "projects/colorpicker/tsconfig.spec.json",
-            "karmaConfig": "projects/colorpicker/karma.conf.js"
+            "karmaConfig": "projects/colorpicker/karma.conf.js",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "**/fixtures/**"
+            ],
+            "styles": [
+              "@skyux/theme/css/sky.css",
+              "@skyux/theme/css/themes/modern/styles.css"
+            ]
           }
         },
         "lint": {

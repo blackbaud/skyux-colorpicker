@@ -195,6 +195,8 @@ export class SkyColorpickerInputDirective
 
     this.skyColorpickerInput.updatePickerValues(this.initialColor);
 
+    /* Sanity check */
+    /* istanbul ignore else */
     if (!this._disabled) {
       this.skyColorpickerInput.backgroundColorForDisplay = this.initialColor;
     }
