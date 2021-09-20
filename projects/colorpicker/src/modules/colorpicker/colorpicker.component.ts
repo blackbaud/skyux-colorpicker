@@ -141,6 +141,15 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   @Input()
   public showResetButton = true;
 
+  public set disabled(value: boolean) {
+    this._disabled = value;
+    this.changeDetector.markForCheck();
+  }
+
+  public get disabled(): boolean {
+    return this._disabled;
+  }
+
   public idIndex: number;
   public skyColorpickerHexId: string;
   public skyColorpickerRedId: string;
@@ -223,6 +232,8 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   private pickerUnsubscribe: Subject<void>;
 
   private _colorpickerRef: ElementRef;
+
+  private _disabled: boolean = false;
 
   constructor(
     private affixService: SkyAffixService,
