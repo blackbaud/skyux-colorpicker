@@ -80,6 +80,10 @@ describe('Colorpicker', () => {
     it('should match previous disabled screenshot', (done) => {
       validateColorpickerDisabled(done);
     });
+
+    it('should match previous disabled screenshot', (done) => {
+      validateColorpickerDisabled(done);
+    });
   }
   //#endregion
 
