@@ -87,6 +87,10 @@ describe('Colorpicker Component', () => {
     return element.querySelector('.sky-colorpicker-button') as HTMLElement;
   }
 
+  function getColorpickerIcon(): HTMLElement {
+    return document.querySelector('.sky-colorpicker-button-icon');
+  }
+
   function getColorpickerButtonBackgroundColor(element: HTMLElement): string {
     const buttonElem = getColorpickerButton(element);
     return buttonElem.style.backgroundColor;
@@ -341,6 +345,20 @@ describe('Colorpicker Component', () => {
 
       expect(getColorpickerButton(nativeElement).getAttribute('aria-label')).toBeNull();
       expect(getColorpickerButton(nativeElement).getAttribute('title')).toBeNull();
+    }));
+
+    it('should add icon overlay', fakeAsync(() => {
+      const icon = getColorpickerIcon();
+      expect(icon).toBeNull();
+
+      fixture.componentInstance.icon = 'text-color';
+      fixture.componentInstance.iconType = 'skyux';
+      fixture.detectChanges();
+      tick();
+
+      const iconNew = getColorpickerIcon();
+
+      expect(iconNew).not.toBeNull();
     }));
 
     it('should output RGBA', fakeAsync(() => {
@@ -1169,8 +1187,7 @@ describe('Colorpicker Component', () => {
       fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();
-      const colorpicker = document.querySelector('sky-colorpicker');
-      const icon = colorpicker.querySelector('.sky-colorpicker-button-icon');
+      const icon = getColorpickerIcon();
 
       expect(icon.getAttribute('style')).toEqual('color: rgb(0, 0, 0);');
 
