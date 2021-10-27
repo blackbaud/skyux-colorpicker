@@ -195,6 +195,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
   }
 
   public get backgroundColorForDisplay(): string {
+    /* istanbul ignore next */
     return this._backgroundColorForDisplay || '#fff';
   }
 

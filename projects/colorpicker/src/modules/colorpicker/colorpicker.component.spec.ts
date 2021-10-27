@@ -1162,6 +1162,26 @@ describe('Colorpicker Component', () => {
       fixture = TestBed.createComponent(ColorpickerTestComponent);
     });
 
+    it('should update foreground icon color to have proper color contrast', async () => {
+      fixture.componentInstance.colorModel = '#ffffff';
+      fixture.componentInstance.icon = 'text-color';
+      fixture.componentInstance.iconType = 'skyux';
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      const colorpicker = document.querySelector('sky-colorpicker');
+      const icon = colorpicker.querySelector('.sky-colorpicker-button-icon');
+
+      expect(icon.getAttribute('style')).toEqual('color: rgb(0, 0, 0);');
+
+      fixture.componentInstance.colorModel = '#000000';
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(icon.getAttribute('style')).toEqual('color: rgb(255, 255, 255);');
+    });
+
     it('should be accessible when closed', async () => {
       fixture.detectChanges();
       await fixture.whenStable();
