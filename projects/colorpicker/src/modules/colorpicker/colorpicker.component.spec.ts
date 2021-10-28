@@ -351,8 +351,8 @@ describe('Colorpicker Component', () => {
       const icon = getColorpickerIcon();
       expect(icon).toBeNull();
 
-      fixture.componentInstance.icon = 'text-color';
-      fixture.componentInstance.iconType = 'skyux';
+      fixture.componentInstance.pickerButtonIcon = 'text-color';
+      fixture.componentInstance.pickerButtonIconType = 'skyux';
       fixture.detectChanges();
       tick();
 
@@ -1182,8 +1182,8 @@ describe('Colorpicker Component', () => {
 
     it('should update foreground icon color to have proper color contrast', async () => {
       fixture.componentInstance.colorModel = '#ffffff';
-      fixture.componentInstance.icon = 'text-color';
-      fixture.componentInstance.iconType = 'skyux';
+      fixture.componentInstance.pickerButtonIcon = 'text-color';
+      fixture.componentInstance.pickerButtonIconType = 'skyux';
       fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();

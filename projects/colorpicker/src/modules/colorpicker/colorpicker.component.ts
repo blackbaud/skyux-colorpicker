@@ -103,14 +103,14 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
    * @internal
    */
   @Input()
-  public icon?: string;
+  public pickerButtonIcon?: string;
 
   /**
    * Specifies the type of icon to display. Specifying `fa` will display a Font Awesome icon, while specifying `skyux` will display an icon from the custom SKY UX icon font. Note that the custom SKY UX icon font is currently in beta.
    * @internal
    */
   @Input()
-  public iconType?: string = 'fa';
+  public pickerButtonIconType?: string = 'fa';
 
   /**
    * Specifies an ARIA label for the colorpicker. This sets the colorpicker's `aria-label` attribute
@@ -191,7 +191,7 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   public set backgroundColorForDisplay(value: string) {
     this._backgroundColorForDisplay = value;
-    if (this.icon) {
+    if (this.pickerButtonIcon) {
       this.iconColor = this.getAccessibleIconColor(this.selectedColor);
     }
   }
