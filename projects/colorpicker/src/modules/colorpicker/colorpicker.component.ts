@@ -100,12 +100,14 @@ export class SkyColorpickerComponent implements OnInit, OnDestroy {
 
   /**
    * Specifies the name of the [Font Awesome 4.7](https://fontawesome.com/v4.7/icons/) icon to overlay on top of the picker. Do not specify the `fa fa-` classes.
+   * @internal
    */
   @Input()
   public icon?: string;
 
   /**
    * Specifies the type of icon to display. Specifying `fa` will display a Font Awesome icon, while specifying `skyux` will display an icon from the custom SKY UX icon font. Note that the custom SKY UX icon font is currently in beta.
+   * @internal
    */
   @Input()
   public iconType?: string = 'fa';
