@@ -1,6 +1,6 @@
 # 5.1.0 (2021-10-28)
 
-- Updated the colorpicker component to allow the text editor component to display an icon overlay on top of the picker button. [#108](https://github.com/blackbaud/skyux-colorpicker/pull/108)
+- Updated the colorpicker component to fix the appearance of the picker button in the text editor component. [#108](https://github.com/blackbaud/skyux-colorpicker/pull/108)
 - Fixed the colorpicker component to display the picker button chevron in modern theme. [#107](https://github.com/blackbaud/skyux-colorpicker/pull/107)
 
 # 5.0.0 (2021-10-01)
