@@ -84,6 +84,12 @@ describe('Colorpicker', () => {
     it('should match previous disabled screenshot', (done) => {
       validateColorpickerDisabled(done);
     });
+
+    it('should match previous screenshot with icon overlay', async (done) => {
+      await expect('#screenshot-colorpicker-icon-overlay').toMatchBaselineScreenshot(done, {
+        screenshotName: getScreenshotName('colorpicker-icon-overlay')
+      });
+    });
   }
   //#endregion
 
