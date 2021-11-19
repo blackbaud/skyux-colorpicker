@@ -4,13 +4,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@skyux/colorpicker": [
-        "projects/colorpicker/src/public-api.ts"
-      ],
-      "colorpicker": [
-        "dist/colorpicker/colorpicker",
-        "dist/colorpicker"
-      ]
+      "@skyux/colorpicker": ["projects/colorpicker/src/public-api.ts"],
+      "colorpicker": ["dist/colorpicker/colorpicker", "dist/colorpicker"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -21,10 +16,7 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false

@@ -1,14 +1,10 @@
-<div
-  class=“sky-padding-even-default”
->
-  <label
-    class=“sky-control-label”
-  >
+<div class="“sky-padding-even-default”">
+  <label class="“sky-control-label”">
     Theme:
     <sky-e2e-theme-selector></sky-e2e-theme-selector>
   </label>
 </div>
-<br>
+<br />
 <button
   class="sky-btn sky-btn-default"
   type="button"
@@ -17,18 +13,10 @@
   Toggle Colorpicker #1's Disable State
 </button>
 
-<form
-  [formGroup]="myForm"
->
-  <h3>
-    Colorpicker #1 (disable-able via a reactive form)
-  </h3>
-  <div
-    id="screenshot-colorpicker"
-  >
-    <sky-colorpicker
-      #colorPickerExample1
-    >
+<form [formGroup]="myForm">
+  <h3>Colorpicker #1 (disable-able via a reactive form)</h3>
+  <div id="screenshot-colorpicker">
+    <sky-colorpicker #colorPickerExample1>
       <input
         formControlName="colorpicker"
         [initialColor]="selectedColor1"
@@ -36,20 +24,13 @@
         [presetColors]="presetColors1"
         [skyColorpickerInput]="colorPickerExample1"
         [(ngModel)]="color1"
-      >
+      />
     </sky-colorpicker>
   </div>
 </form>
-<h3>
-  Colorpicker #2
-</h3>
-<div
-  id="screenshot-colorpicker2"
-  style="height:50px;padding:10px;"
->
-  <sky-colorpicker
-    #colorPickerExample2
-  >
+<h3>Colorpicker #2</h3>
+<div id="screenshot-colorpicker2" style="height: 50px; padding: 10px">
+  <sky-colorpicker #colorPickerExample2>
     <input
       [allowTransparency]="false"
       [initialColor]="selectedColor2"
@@ -57,20 +38,13 @@
       [presetColors]="presetColors2"
       [skyColorpickerInput]="colorPickerExample2"
       [(ngModel)]="color2"
-    >
+    />
   </sky-colorpicker>
 </div>
 
-<h3>
-  Colorpicker #3 (disabled via a template-driven form)
-</h3>
-<div
-  id="screenshot-colorpicker3"
-  style="height:50px;padding:10px;"
->
-  <sky-colorpicker
-    #colorPickerExample3
-  >
+<h3>Colorpicker #3 (disabled via a template-driven form)</h3>
+<div id="screenshot-colorpicker3" style="height: 50px; padding: 10px">
+  <sky-colorpicker #colorPickerExample3>
     <input
       [allowTransparency]="false"
       [disabled]="disabled"
@@ -79,24 +53,17 @@
       [presetColors]="presetColors3"
       [skyColorpickerInput]="colorPickerExample3"
       [(ngModel)]="color3"
-    >
+    />
   </sky-colorpicker>
 </div>
 
-
-<h3>
-  Colorpicker #4 icon overlay
-</h3>
-<div
-  id="screenshot-colorpicker-icon-overlay"
->
+<h3>Colorpicker #4 icon overlay</h3>
+<div id="screenshot-colorpicker-icon-overlay">
   <sky-colorpicker
     pickerButtonIcon="text-color"
     pickerButtonIconType="skyux"
     #colorPickerExample4
   >
-    <input
-      [skyColorpickerInput]="colorPickerExample4"
-    >
+    <input [skyColorpickerInput]="colorPickerExample4" />
   </sky-colorpicker>
 </div>

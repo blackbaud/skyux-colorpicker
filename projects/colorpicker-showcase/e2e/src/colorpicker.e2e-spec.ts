@@ -1,20 +1,10 @@
-import {
-  by,
-  element
-} from 'protractor';
+import { by, element } from 'protractor';
 
-import {
-  expect,
-  SkyHostBrowser,
-  SkyVisualThemeSelector
-} from '@skyux-sdk/e2e';
+import { expect, SkyHostBrowser, SkyVisualThemeSelector } from '@skyux-sdk/e2e';
 
-import {
-  SkyHostBrowserBreakpoint
-} from '@skyux-sdk/e2e/host-browser/host-browser-breakpoint';
+import { SkyHostBrowserBreakpoint } from '@skyux-sdk/e2e/host-browser/host-browser-breakpoint';
 
 describe('Colorpicker', () => {
-
   //#region helpers
   let browserSize: SkyHostBrowserBreakpoint;
   let currentTheme: string;
@@ -51,20 +41,20 @@ describe('Colorpicker', () => {
 
   async function validateColorpicker(done: DoneFn): Promise<void> {
     await expect('#screenshot-colorpicker').toMatchBaselineScreenshot(done, {
-      screenshotName: getScreenshotName('colorpicker')
+      screenshotName: getScreenshotName('colorpicker'),
     });
   }
 
   async function validateColorpickerOpened(done: DoneFn): Promise<void> {
     await element(by.css('.sky-colorpicker-button')).click();
     await expect('.sky-colorpicker-container').toMatchBaselineScreenshot(done, {
-      screenshotName: getScreenshotName('colorpicker-opened')
+      screenshotName: getScreenshotName('colorpicker-opened'),
     });
   }
 
   async function validateColorpickerDisabled(done: DoneFn): Promise<void> {
     expect('#screenshot-colorpicker3').toMatchBaselineScreenshot(done, {
-      screenshotName: getScreenshotName('colorpicker-disabled')
+      screenshotName: getScreenshotName('colorpicker-disabled'),
     });
   }
 
@@ -86,15 +76,17 @@ describe('Colorpicker', () => {
     });
 
     it('should match previous screenshot with icon overlay', async (done) => {
-      await expect('#screenshot-colorpicker-icon-overlay').toMatchBaselineScreenshot(done, {
-        screenshotName: getScreenshotName('colorpicker-icon-overlay')
+      await expect(
+        '#screenshot-colorpicker-icon-overlay'
+      ).toMatchBaselineScreenshot(done, {
+        screenshotName: getScreenshotName('colorpicker-icon-overlay'),
       });
     });
   }
   //#endregion
 
   describe('(size: lg)', () => {
-    beforeEach( async() => {
+    beforeEach(async () => {
       currentTheme = undefined;
       currentThemeMode = undefined;
       await SkyHostBrowser.get('visual/colorpicker');
@@ -121,7 +113,7 @@ describe('Colorpicker', () => {
   });
 
   describe('(size: xs)', () => {
-    beforeEach( async() => {
+    beforeEach(async () => {
       currentTheme = undefined;
       currentThemeMode = undefined;
       await SkyHostBrowser.get('visual/colorpicker');
