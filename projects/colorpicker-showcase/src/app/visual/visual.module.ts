@@ -9,16 +9,13 @@ import { ColorpickerVisualComponent } from './colorpicker/colorpicker-visual.com
 import { VisualComponent } from './visual.component';
 
 @NgModule({
-  declarations: [
-    ColorpickerVisualComponent,
-    VisualComponent
-  ],
+  declarations: [ColorpickerVisualComponent, VisualComponent],
   imports: [
     SkyColorpickerModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SkyE2eThemeSelectorModule
-  ]
+    SkyE2eThemeSelectorModule,
+  ],
 })
-export class VisualModule { }
+export class VisualModule {}

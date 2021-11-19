@@ -1,17 +1,10 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-colorpicker-visual',
-  templateUrl: './colorpicker-visual.component.html'
+  templateUrl: './colorpicker-visual.component.html',
 })
 export class ColorpickerVisualComponent implements OnInit {
   public color1: any;
@@ -29,7 +22,7 @@ export class ColorpickerVisualComponent implements OnInit {
     '#E87134',
     '#DA9C9C',
     '#A1B1A7',
-    '#68AFEF'
+    '#68AFEF',
   ];
 
   public color2: any;
@@ -47,7 +40,7 @@ export class ColorpickerVisualComponent implements OnInit {
     '#E87134',
     '#DA9C9C',
     '#A1B1A7',
-    '#68AFEF'
+    '#68AFEF',
   ];
 
   public color3: any;
@@ -65,19 +58,17 @@ export class ColorpickerVisualComponent implements OnInit {
     '#E87134',
     '#DA9C9C',
     '#A1B1A7',
-    '#68AFEF'
+    '#68AFEF',
   ];
 
   public myForm: FormGroup;
   public disabled: boolean = true;
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private formBuilder: FormBuilder) {}
 
   public ngOnInit(): void {
     this.myForm = this.formBuilder.group({
-      colorpicker: new FormControl('')
+      colorpicker: new FormControl(''),
     });
   }
 
