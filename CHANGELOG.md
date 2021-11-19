@@ -1,6 +1,6 @@
 # 5.1.1 (2021-11-19)
 
-- Added support for Prettier code formatting and updated the builder to support StackBlitz. []()
+- Added support for Prettier code formatting and updated the builder to support StackBlitz. [#110](https://github.com/blackbaud/skyux-colorpicker/pull/110)
 
 # 5.1.0 (2021-10-28)
 
