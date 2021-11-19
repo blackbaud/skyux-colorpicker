@@ -1,10 +1,10 @@
 import { DebugElement } from '@angular/core';
 
 import {
+  ComponentFixture,
   fakeAsync,
   TestBed,
   tick,
-  ComponentFixture,
   waitForAsync,
 } from '@angular/core/testing';
 
@@ -20,9 +20,13 @@ import {
   SkyThemeSettingsChange,
 } from '@skyux/theme';
 
+import { BehaviorSubject } from 'rxjs';
+
 import { sampleTime } from 'rxjs/operators';
 
-import { BehaviorSubject } from 'rxjs';
+import { SkyColorpickerInputDirective } from './colorpicker-input.directive';
+
+import { SkyColorpickerComponent } from './colorpicker.component';
 
 import { ColorpickerTestComponent } from './fixtures/colorpicker-component.fixture';
 
@@ -31,10 +35,6 @@ import { SkyColorpickerFixturesModule } from './fixtures/colorpicker-fixtures.mo
 import { ColorpickerReactiveTestComponent } from './fixtures/colorpicker-reactive-component.fixture';
 
 import { SkyColorpickerMessageType } from './types/colorpicker-message-type';
-
-import { SkyColorpickerComponent } from './colorpicker.component';
-
-import { SkyColorpickerInputDirective } from './colorpicker-input.directive';
 
 describe('Colorpicker Component', () => {
   let fixture: ComponentFixture<any>;
@@ -207,12 +207,10 @@ describe('Colorpicker Component', () => {
 
   function getElementCoords(element: Element): { x: number; y: number } {
     const rect = element.getBoundingClientRect();
-    const coords = {
+    return {
       x: Math.round(rect.left + rect.width / 2),
       y: Math.round(rect.top + rect.height / 2),
     };
-
-    return coords;
   }
 
   function setInputElementValue(
