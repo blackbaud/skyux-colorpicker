@@ -1,3 +1,6 @@
+# 5.1.3 (2022-02-18)
+- Fixed default value punctuation. [#113](https://github.com/blackbaud/skyux-colorpicker/pull/113)
+
 # 5.1.2 (2021-12-21)
 
 - Fix Stackblitz demo. [#112](https://github.com/blackbaud/skyux-colorpicker/pull/112)
