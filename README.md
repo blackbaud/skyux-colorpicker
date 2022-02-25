@@ -1,3 +1,7 @@
-# @skyux/colorpicker Workspace
+# @skyux/colorpicker (moved)
 
-For information about `@skyux/colorpicker` please visit the library's README file, located at `projects/colorpicker/README.md`.
+### *The source code for `@skyux/colorpicker` has moved to [blackbaud/skyux](https://github.com/blackbaud/skyux).*
+
+To work with the latest version of `@skyux/colorpicker`, go to [blackbaud/skyux](https://github.com/blackbaud/skyux).
+
+The source code for SKY UX 4 remains in the [`4.x.x`](https://github.com/blackbaud/skyux-colorpicker/tree/4.x.x) branch of this repo.
